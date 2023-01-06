@@ -17,27 +17,23 @@ using System.Text;
 using System.Net.Sockets;
 using EIPTest.lib.Org;
 
-namespace EIPTest.WebAdmin.Commodity
+
+namespace EIPTest.WebAdmin.Bulletin
 {
-    public partial class DeleteCommodity : System.Web.UI.Page
+    public partial class Bulletinaspx : System.Web.UI.Page
     {
         DataBase db = new DataBase();
         public ArrayList _arrayList = new ArrayList();
         protected void Page_Load(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
-            int rQuery = Int32.Parse(Request.QueryString["id"]);
-            sb.Append("SELECT A.ITEM_ID, A.TYPE_ID, A.ITEM_TITLE, A.ITEM_PLACE, A.ITEM_PIC, A.ITEM_DESCR, A.ITEM_COUNT, A.ITEM_PRICE, A.ITEM_OPEN, A.ITEM_CLOSE, A.ITEM_STATUS, B.TYPE_NAME FROM ITEM_DETAIL A, ITEM_TYPE B WHERE A.TYPE_ID = B.TYPE_ID AND A.ITEM_ID ="+rQuery);
+            sb.Append("SELECT NOTICE_ID, NOTICE_TOPIC, NOTICE_CONTENT, NOTICE_OPEN, NOTICE_CLOSE, NOTICE_STATUS, CREATE_TIME, MODIFY_TIME FROM NOTICE_DETAIL WHERE NOT NOTICE_STATUS ='D'");
             _arrayList = db.QueryDB(sb.ToString());
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            StringBuilder sb1 = new StringBuilder();
-            int rQuery = Int32.Parse(Request.QueryString["id"]);
-            sb1.Append("UPDATE ITEM_DETAIL SET ITEM_STATUS= 'D', DELETE_TIME = SYSDATE WHERE ITEM_ID=" + rQuery);
-            db.UpdateDB(sb1.ToString());
-            Response.Redirect("~/WebAdmin/Commodity/Commodity.aspx");
+            Response.Redirect("~/WebAdmin/Bulletin/CreateBulletin.aspx");
         }
     }
 }

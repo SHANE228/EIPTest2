@@ -24,24 +24,27 @@
             {
 
         %>
-        <%string msg = ht["ITEM_STATUS"].ToString(); %>
+            <%string msg = ht["ITEM_STATUS"].ToString(); %>
+            <%string str=ht["ITEM_OPEN"].ToString();
+                DateTime open =DateTime.ParseExact(str,"yyyyMMdd",null);  %>
+            <%string str1=ht["ITEM_CLOSE"].ToString();
+                DateTime close =DateTime.ParseExact(str1,"yyyyMMdd",null);  %>
         <tr>
             <td><%=ht["ITEM_ID"].ToString() %></td>
             <td><%=ht["TYPE_NAME"].ToString() %></td>
             <td><%=ht["ITEM_TITLE"].ToString() %></td>
             <td><%=ht["ITEM_PLACE"].ToString() %></td>
-            <td>
-            <img src="<%=ht["ITEM_PIC"].ToString()%>" width="50" /></td>
+            <td><img src="<%=ht["ITEM_PIC"].ToString()%>" width="50" /></td>
             <td><%=ht["ITEM_DESCR"].ToString()  %></td>
             <td><%=ht["ITEM_COUNT"].ToString() %></td>
             <td><%=ht["ITEM_PRICE"].ToString() %></td>
-            <td><%=ht["ITEM_OPEN"].ToString() %></td>
-            <td><%=ht["ITEM_CLOSE"].ToString() %></td>
-            <td><% if (msg == "Y")
-                  {%><span>上架</span> <%}
-                  else
-                  {%><span>下架</span> <%}
-                   %></td>
+            <td><%=open.ToString("yyyy/MM/dd")%></td>
+            <td><%=close.ToString("yyyy/MM/dd")%></td>
+            <td><% if (msg == "Y") 
+                   {%><span>上架</span> <%}
+                   else
+                   {%><span>下架</span> <%}
+            %></td>
         </tr>
         <%}%>
     </table>

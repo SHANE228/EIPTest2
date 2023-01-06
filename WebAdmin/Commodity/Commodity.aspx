@@ -19,6 +19,8 @@
             <th>上架日期 &nbsp;</th>
             <th>下架日期 &nbsp;</th>
             <th>商品狀態 &nbsp;</th>
+            <th>加入日期 &nbsp;</th>
+            <th>修改日期 &nbsp;</th>
         </tr>
         <%
             foreach (Hashtable ht in _arrayList)
@@ -26,6 +28,12 @@
 
         %>
             <%string msg = ht["ITEM_STATUS"].ToString(); %>
+            <%string str=ht["ITEM_OPEN"].ToString();
+                DateTime open =DateTime.ParseExact(str,"yyyyMMdd",null);  %>
+            <%string str1=ht["ITEM_CLOSE"].ToString();
+                DateTime close =DateTime.ParseExact(str1,"yyyyMMdd",null);  %>
+            <%DateTime ct = DateTime.Parse(ht["CREATE_TIME"].ToString()); %>
+            <%DateTime mt = DateTime.Parse(ht["MODIFY_TIME"].ToString()); %>
         <tr>
             <td><%=ht["ITEM_ID"].ToString() %></td>
             <td><%=ht["TYPE_NAME"].ToString() %></td>
@@ -35,13 +43,15 @@
             <td><%=ht["ITEM_DESCR"].ToString()  %></td>
             <td><%=ht["ITEM_COUNT"].ToString() %></td>
             <td><%=ht["ITEM_PRICE"].ToString() %></td>
-            <td><%=ht["ITEM_OPEN"].ToString() %></td>
-            <td><%=ht["ITEM_CLOSE"].ToString() %></td>
+            <td><%=open.ToString("yyyy/MM/dd")%></td>
+            <td><%=close.ToString("yyyy/MM/dd")%></td>
             <td><% if (msg == "Y") 
                    {%><span>上架</span> <%}
                    else
                    {%><span>下架</span> <%}
             %></td>
+            <td><%=ct.ToString("yyyy/MM/dd") %></td>
+            <td><%=mt.ToString("yyyy/MM/dd") %></td>
             <td><a href="EditCommodity.aspx?id=<%=ht["ITEM_ID"].ToString()%>">編輯&nbsp;</a></td>
             <td><a href="DeleteCommodity.aspx?id=<%=ht["ITEM_ID"].ToString()%>">刪除</a></td>
         </tr>

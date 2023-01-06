@@ -162,6 +162,10 @@
     <Content Include="PIC\ac.jpg" />
     <Content Include="WebAdmin\AdminDefault.aspx" />
     <Content Include="WebAdmin\AdminLogin.aspx" />
+    <Content Include="WebAdmin\Bulletin\Bulletin.aspx" />
+    <Content Include="WebAdmin\Bulletin\CreateBulletin.aspx" />
+    <Content Include="WebAdmin\Bulletin\DeleteBulletin.aspx" />
+    <Content Include="WebAdmin\Bulletin\EditBulletin.aspx" />
     <Content Include="WebAdmin\Category\CommodityCategory.aspx" />
     <Content Include="WebAdmin\Category\CreateCategory.aspx" />
     <Content Include="WebAdmin\Category\DeleteCategory.aspx" />
@@ -334,6 +338,34 @@
     </Compile>
     <Compile Include="WebAdmin\AdminLogin.aspx.designer.cs">
       <DependentUpon>AdminLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebAdmin\Bulletin\Bulletin.aspx.cs">
+      <DependentUpon>Bulletin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebAdmin\Bulletin\Bulletin.aspx.designer.cs">
+      <DependentUpon>Bulletin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebAdmin\Bulletin\CreateBulletin.aspx.cs">
+      <DependentUpon>CreateBulletin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebAdmin\Bulletin\CreateBulletin.aspx.designer.cs">
+      <DependentUpon>CreateBulletin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebAdmin\Bulletin\DeleteBulletin.aspx.cs">
+      <DependentUpon>DeleteBulletin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebAdmin\Bulletin\DeleteBulletin.aspx.designer.cs">
+      <DependentUpon>DeleteBulletin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebAdmin\Bulletin\EditBulletin.aspx.cs">
+      <DependentUpon>EditBulletin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebAdmin\Bulletin\EditBulletin.aspx.designer.cs">
+      <DependentUpon>EditBulletin.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebAdmin\Category\CommodityCategory.aspx.cs">
       <DependentUpon>CommodityCategory.aspx</DependentUpon>

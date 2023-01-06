@@ -8,6 +8,6 @@
     <p>類別名稱</p>
     <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
     <p>類別說明</p>
-    <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox><br />
+    <asp:TextBox ID="TextBox4" TextMode="MultiLine"  Height="122px" Width="273px" runat="server"></asp:TextBox><br />
     <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
 </asp:Content>

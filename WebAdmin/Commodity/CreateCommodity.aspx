@@ -39,7 +39,7 @@
         <p>商品照片</p>
         <asp:FileUpload ID="FileUpload1" runat="server" />
         <p>商品內容</p>
-        <asp:TextBox ID="ITEM_DESCR" runat="server"></asp:TextBox>
+        <asp:TextBox ID="ITEM_DESCR" TextMode="MultiLine"  Height="122px" Width="273px"  runat="server"></asp:TextBox>
         <p>商品數量</p>
         <asp:TextBox ID="ITEM_COUNT" runat="server"></asp:TextBox>
         <p>商品金額</p>
