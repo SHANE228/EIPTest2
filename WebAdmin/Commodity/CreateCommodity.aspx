@@ -2,8 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
     <div>
-
-        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True"  OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged1"></asp:DropDownList>
+        <p>類別代號</p>
+        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True"  OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged1">
+        </asp:DropDownList>
         <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="True"></asp:DropDownList>
         <%--<p>類別代號</p>
 
@@ -39,6 +40,8 @@
         <asp:FileUpload ID="FileUpload1" runat="server" />
         <p>商品內容</p>
         <asp:TextBox ID="ITEM_DESCR" runat="server"></asp:TextBox>
+        <p>商品數量</p>
+        <asp:TextBox ID="ITEM_COUNT" runat="server"></asp:TextBox>
         <p>商品金額</p>
         <asp:TextBox ID="ITEM_PRICE" runat="server"></asp:TextBox>
         <p>上架日期</p>
@@ -49,7 +52,6 @@
         <asp:DropDownList ID="ITEM_STATUS" runat="server">
             <asp:ListItem Value="Y">上架</asp:ListItem>
             <asp:ListItem Value="N">下架</asp:ListItem>
-            <asp:ListItem Value="D">刪除</asp:ListItem>
         </asp:DropDownList><br />
         <asp:Button ID="Button1" runat="server" Text="完成" OnClick="Button1_Click" />
     </div>

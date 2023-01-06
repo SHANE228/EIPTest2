@@ -7,11 +7,11 @@
 // </自動產生的>
 //------------------------------------------------------------------------------
 
-namespace EIPTest.WebAdmin
+namespace EIPTest.WebAdmin.Commodity
 {
 
 
-    public partial class DeleteCategory
+    public partial class DeleteCommodity
     {
 
         /// <summary>

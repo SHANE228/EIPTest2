@@ -39,11 +39,13 @@
             <th>身分證字號&nbsp;</th>
             <th>帳號&nbsp;</th>
             <th>姓名&nbsp;</th>
-            <th>電子郵件&nbsp;</th>
+            <th>信箱&nbsp;</th>
             <th>性別&nbsp;</th>
-            <th>電話&nbsp;</th>
+            <th>手機&nbsp;</th>
             <th>居住地&nbsp;</th>
             <th>生日&nbsp;</th>
+            <th>加入日期&nbsp;</th>
+            <th>修改日期&nbsp;</th>
         </tr>
 
         <%
@@ -58,6 +60,8 @@
             %>
         <%Int32 intSex = Int32.Parse((ht["EMP_SEX"].ToString())); %>
         <%DateTime dt = DateTime.Parse(ht["EMP_BIRTHDAY"].ToString()); %>
+        <%DateTime ct = DateTime.Parse(ht["CREATE_TIME"].ToString()); %>
+        <%DateTime mt = DateTime.Parse(ht["MODIFY_TIME"].ToString()); %>
         <tr>
             <td><%=MyAesCryptography.Decrypt(myKey, myIV, NID) %>&nbsp;</td>
             <td><%=ht["EMP_ID"].ToString() %>&nbsp;</td>
@@ -67,6 +71,8 @@
             <td><%=ht["EMP_PHONE"].ToString() %>&nbsp;</td>
             <td><%=ht["EMP_PLACE"].ToString() %>&nbsp;</td>
             <td><%=dt.ToString("yyyy/MM/dd") %>&nbsp;</td>
+            <td><%=ct.ToString("yyyy/MM/dd") %>&nbsp;</td>
+            <td><%=mt.ToString("yyyy/MM/dd") %>&nbsp;</td>
         </tr>
         <%}%>
     </table>

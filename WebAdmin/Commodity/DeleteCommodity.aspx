@@ -1,8 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebAdmin/Admin.Master" AutoEventWireup="true" CodeBehind="Commodity.aspx.cs" Inherits="EIPTest.WebAdmin.Commodity.Commodity" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebAdmin/Admin.Master" AutoEventWireup="true" CodeBehind="DeleteCommodity.aspx.cs" Inherits="EIPTest.WebAdmin.Commodity.DeleteCommodity" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <p>商品管理</p>
-    <asp:Button ID="Button1" runat="server" Text="新增商品管理" OnClick="Button1_Click" />
-     <%
+    <%
         if (_arrayList.Count > 0)
         {
     %>
@@ -25,27 +24,27 @@
             {
 
         %>
-            <%string msg = ht["ITEM_STATUS"].ToString(); %>
+        <%string msg = ht["ITEM_STATUS"].ToString(); %>
         <tr>
             <td><%=ht["ITEM_ID"].ToString() %></td>
             <td><%=ht["TYPE_NAME"].ToString() %></td>
             <td><%=ht["ITEM_TITLE"].ToString() %></td>
             <td><%=ht["ITEM_PLACE"].ToString() %></td>
-            <td><img src="<%=ht["ITEM_PIC"].ToString()%>" width="50" /></td>
+            <td>
+            <img src="<%=ht["ITEM_PIC"].ToString()%>" width="50" /></td>
             <td><%=ht["ITEM_DESCR"].ToString()  %></td>
             <td><%=ht["ITEM_COUNT"].ToString() %></td>
             <td><%=ht["ITEM_PRICE"].ToString() %></td>
             <td><%=ht["ITEM_OPEN"].ToString() %></td>
             <td><%=ht["ITEM_CLOSE"].ToString() %></td>
-            <td><% if (msg == "Y") 
-                   {%><span>上架</span> <%}
-                   else
-                   {%><span>下架</span> <%}
-            %></td>
-            <td><a href="EditCommodity.aspx?id=<%=ht["ITEM_ID"].ToString()%>">編輯&nbsp;</a></td>
-            <td><a href="DeleteCommodity.aspx?id=<%=ht["ITEM_ID"].ToString()%>">刪除</a></td>
+            <td><% if (msg == "Y")
+                  {%><span>上架</span> <%}
+                  else
+                  {%><span>下架</span> <%}
+                   %></td>
         </tr>
         <%}%>
     </table>
     <%} %>
+    <asp:Button ID="Button1" runat="server" Text="刪除" OnClick="Button1_Click" />
 </asp:Content>

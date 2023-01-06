@@ -159,6 +159,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="PIC\ac.jpg" />
     <Content Include="WebAdmin\AdminDefault.aspx" />
     <Content Include="WebAdmin\AdminLogin.aspx" />
     <Content Include="WebAdmin\Category\CommodityCategory.aspx" />
@@ -167,6 +168,8 @@
     <Content Include="WebAdmin\Category\EditCategory.aspx" />
     <Content Include="WebAdmin\Commodity\Commodity.aspx" />
     <Content Include="WebAdmin\Commodity\CreateCommodity.aspx" />
+    <Content Include="WebAdmin\Commodity\DeleteCommodity.aspx" />
+    <Content Include="WebAdmin\Commodity\EditCommodity.aspx" />
     <Content Include="WebAdmin\SelectMember.aspx" />
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
@@ -374,6 +377,20 @@
     <Compile Include="WebAdmin\Commodity\CreateCommodity.aspx.designer.cs">
       <DependentUpon>CreateCommodity.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebAdmin\Commodity\DeleteCommodity.aspx.cs">
+      <DependentUpon>DeleteCommodity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebAdmin\Commodity\DeleteCommodity.aspx.designer.cs">
+      <DependentUpon>DeleteCommodity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebAdmin\Commodity\EditCommodity.aspx.cs">
+      <DependentUpon>EditCommodity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebAdmin\Commodity\EditCommodity.aspx.designer.cs">
+      <DependentUpon>EditCommodity.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebAdmin\SelectMember.aspx.cs">
       <DependentUpon>SelectMember.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -384,7 +401,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="PIC\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
