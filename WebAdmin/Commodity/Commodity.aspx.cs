@@ -26,8 +26,7 @@ namespace EIPTest.WebAdmin.Commodity
         public ArrayList _arrayList = new ArrayList();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //StringBuilder sb1 = new StringBuilder();
-            //sb1.Append("SELECT COUNT(*) FROM ITEM_DETAIL WHERE ITEM_STATUS = 'D' ");
+
 
             StringBuilder sb = new StringBuilder();
             sb.Append("SELECT A.ITEM_ID, A.TYPE_ID, A.ITEM_TITLE, A.ITEM_PLACE, A.ITEM_PIC, A.ITEM_DESCR, A.ITEM_COUNT, A.ITEM_PRICE, A.ITEM_OPEN, A.ITEM_CLOSE, A.ITEM_STATUS, A.CREATE_TIME , A.MODIFY_TIME, B.TYPE_NAME FROM ITEM_DETAIL A,ITEM_TYPE B WHERE A.TYPE_ID = B.TYPE_ID AND NOT A.ITEM_STATUS ='D'");
