@@ -23,10 +23,7 @@ namespace EIPTest
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["empId"] == null)
-            {
-                Response.Redirect("~/Login/Login.aspx");
-            }
+
         }
     }
 }

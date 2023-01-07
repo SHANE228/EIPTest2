@@ -7,8 +7,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <style>
@@ -17,16 +15,22 @@
             width: 170px;
             background-color: pink;
             float: left;
+            display: inline-block;
         }
 
         .menus {
-            height: 100vh;
+            height: 500px;
             width: 170px;
             background-color: aliceblue;
             float: left;
         }
-        .submit{
-            text-align:center;
+
+        .submit {
+            text-align: center;
+        }
+
+        .p {
+            line-height: 10px
         }
     </style>
 </head>
@@ -60,24 +64,32 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div>
-                <a class="navbar-brand" runat="server" >後端管理介面:商品促銷資訊平台</a>
+                <a class="navbar-brand" runat="server">後端管理介面:商品促銷資訊平台</a>
             </div>
             <div class="navbar-collapse collapse">
             </div>
         </div>
         <div class="menu">
             <div class="submit">
-                <span>Login</span>
+                <asp:Label ID="Label1" runat="server" Text="Login"></asp:Label>
             </div>
-            <p>帳號<input id="Text1" name="name1" size="10" type="text" /></p>
-            <br />
-            <p>密碼<input id="Text2" name2="name2" size="10" type="text" /></p>
-            <br />
+            <div class="br1">
+                <% if (Session["UserID"] == null)
+                    {
+                %>
+                <asp:Label ID="Label2" runat="server" Text="帳號"></asp:Label><asp:TextBox ID="AdminLogin" runat="server" Width="105px"></asp:TextBox><br />
+                <asp:Label ID="Label3" runat="server" Text="密碼"></asp:Label><asp:TextBox ID="AdminPassword" TextMode="Password" runat="server" Width="105px"></asp:TextBox>
+                <% }%>
+            </div>
             <div class="submit">
-                <input type="submit" name="login" value="登入" />
-                <input type="submit" name="leave" value="登出" />
+                <asp:Button ID="btnLogin" runat="server" Text="登入" OnClick="btnLogin_Click" />
+                <asp:Button ID="btnPassword" runat="server" Text="登出" OnClick="btnPassword_Click" />
             </div>
+
             <div class="menus">
+                <% if (Session["UserID"] != null)
+                    {
+                %>
                 <ul class="nav navbar-nav">
                     <li><a runat="server" href="~/WebAdmin/SelectMember">會員帳號管理</a></li>
                     <li><a runat="server" href="~/WebAdmin/Category/CommodityCategory">商品類別管理</a></li>
@@ -86,9 +98,11 @@
                     <li><a runat="server" href="~/">報表:會員喜好查詢</a></li>
                     <li><a runat="server" href="~/">報表:會員資料分析</a></li>
                 </ul>
-
+                <% }%>
             </div>
+
         </div>
+
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>

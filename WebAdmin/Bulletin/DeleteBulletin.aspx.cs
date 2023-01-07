@@ -26,6 +26,10 @@ namespace EIPTest.WebAdmin.Bulletin
         public ArrayList _arrayList = new ArrayList();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("~/WebAdmin/AdminDefault.aspx");
+            }
             StringBuilder sb = new StringBuilder();
             int rQuery = Int32.Parse(Request.QueryString["id"]);
             sb.Append("SELECT NOTICE_ID, NOTICE_TOPIC, NOTICE_CONTENT, NOTICE_OPEN, NOTICE_CLOSE, NOTICE_STATUS, CREATE_TIME, MODIFY_TIME FROM NOTICE_DETAIL WHERE NOTICE_ID ="+rQuery);

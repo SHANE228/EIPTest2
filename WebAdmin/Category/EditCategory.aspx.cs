@@ -24,6 +24,10 @@ namespace EIPTest.WebAdmin
         DataBase db = new DataBase();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("~/WebAdmin/AdminDefault.aspx");
+            }
             try
             {
                 if (!IsPostBack)

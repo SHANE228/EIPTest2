@@ -26,7 +26,7 @@ namespace EIPTest.Login
         {
             if (Session["empId"] == null)
             {
-                Response.Redirect("~/Login/Login.aspx");
+                Response.Redirect("~/Default.aspx");
             }
             if (!IsPostBack)
             {

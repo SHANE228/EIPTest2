@@ -30,6 +30,10 @@ namespace EIPTest.WebAdmin
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("~/WebAdmin/AdminDefault.aspx");
+            }
             StringBuilder sb = new StringBuilder();
             sb.Append("SELECT TYPE_ID, TYPE_LEVEL, TYPE_UPPER, TYPE_CODE, TYPE_STATUS, TYPE_NAME, TYPE_PS FROM ITEM_TYPE");
             _arrayList = db.QueryDB(sb.ToString());

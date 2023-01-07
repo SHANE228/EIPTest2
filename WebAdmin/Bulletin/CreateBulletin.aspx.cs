@@ -25,7 +25,10 @@ namespace EIPTest.WebAdmin.Bulletin
         DataBase db = new DataBase();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("~/WebAdmin/AdminDefault.aspx");
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)

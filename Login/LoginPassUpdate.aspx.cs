@@ -28,7 +28,7 @@ namespace EIPTest.Login
         {
             if (Session["empId"] == null)
             {
-                Response.Redirect("~/Login/Login.aspx");
+                Response.Redirect("~/Default.aspx");
             }
             EmpObject empBasic = new EmpObject(Session["empId"].ToString());
             Label1.Text = empBasic.empId;

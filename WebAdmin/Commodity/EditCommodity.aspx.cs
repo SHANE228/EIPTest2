@@ -25,6 +25,10 @@ namespace EIPTest.WebAdmin.Commodity
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("~/WebAdmin/AdminDefault.aspx");
+            }
             if (!IsPostBack)
             {
                 StringBuilder sb1 = new StringBuilder();
@@ -154,7 +158,7 @@ namespace EIPTest.WebAdmin.Commodity
                 //db.UpdateDB(sb.ToString());
                 Response.Write(sb.ToString());
             }
-            //Response.Redirect("~/WebAdmin/Commodity/Commodity.aspx");
+            Response.Redirect("~/WebAdmin/Commodity/Commodity.aspx");
         }
     }
 }

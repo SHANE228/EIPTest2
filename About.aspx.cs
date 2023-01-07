@@ -24,10 +24,10 @@ namespace EIPTest
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if(Session["empId"] == null)
-            //{
-            //    Response.Redirect("~/Login/Login.aspx");
-            //}
+            if (Session["empId"] == null)
+            {
+                Response.Redirect("~/Default.aspx");
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -47,23 +47,7 @@ namespace EIPTest
             //SmtpServer.Credentials = new NetworkCredential("mw108m10932024@gmail.com", "pmusloaieyyqnhml");
             //SmtpServer.Send(email);
 
-            MailMessage msg = new MailMessage();
-            msg.To.Add(new MailAddress("ym3878394@gmail.com"));
-            msg.From = new MailAddress("shin-jan@outlook.com", "新展");
-            msg.Subject = "您的密碼";
-            msg.Body = "<html><body>您的密碼 :</body><html>";
-            msg.IsBodyHtml = true;
 
-            SmtpClient client = new SmtpClient();
-            client.UseDefaultCredentials = false;
-            client.Credentials = new System.Net.NetworkCredential("shin-jan@outlook.com", "yp6151111");
-            client.Port = 587;
-            client.Host = "smtp.office365.com";
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.EnableSsl = true;
-            client.Send(msg);
-            client.Dispose();
-            msg.Dispose();
         }
 
     }

@@ -24,6 +24,10 @@ namespace EIPTest.WebAdmin
         public ArrayList _arrayList = new ArrayList();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("~/WebAdmin/AdminDefault.aspx");
+            }
             StringBuilder sb = new StringBuilder();
             int rQuery = Int32.Parse(Request.QueryString["id"]);
             sb.Append("SELECT TYPE_ID, TYPE_LEVEL, TYPE_UPPER, TYPE_CODE, TYPE_STATUS, TYPE_NAME, TYPE_PS FROM ITEM_TYPE WHERE TYPE_ID=" + rQuery);
