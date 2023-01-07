@@ -33,21 +33,28 @@
 
         <p>商品名稱</p>
         <asp:TextBox ID="ITEM_NAME" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="ITEM_NAME" runat="server" ErrorMessage="商品名稱必填"></asp:RequiredFieldValidator>
         <p>販促地點</p>
-         <asp:RadioButton ID="RadioButton1" runat="server" Text="ESkyMall" GroupName="Mall" />
+        <asp:RadioButton ID="RadioButton1" runat="server" Text="ESkyMall" GroupName="Mall" />
         <asp:RadioButton ID="RadioButton2" runat="server" Text="EdaMall" GroupName="Mall" /><br />
         <p>商品照片</p>
         <asp:FileUpload ID="FileUpload1" runat="server" />
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="FileUpload1" runat="server" ErrorMessage="商品照片必填"></asp:RequiredFieldValidator>
         <p>商品內容</p>
         <asp:TextBox ID="ITEM_DESCR" TextMode="MultiLine"  Height="122px" Width="273px"  runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ControlToValidate="ITEM_DESCR" runat="server" ErrorMessage="商品內容必填"></asp:RequiredFieldValidator>
         <p>商品數量</p>
         <asp:TextBox ID="ITEM_COUNT" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ControlToValidate="ITEM_COUNT" runat="server" ErrorMessage="商品數量必填"></asp:RequiredFieldValidator>
         <p>商品金額</p>
         <asp:TextBox ID="ITEM_PRICE" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ControlToValidate="ITEM_PRICE" runat="server" ErrorMessage="商品金額必填"></asp:RequiredFieldValidator>
         <p>上架日期</p>
         <asp:TextBox ID="ITEM_OPEN" TextMode="Date" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ControlToValidate="ITEM_OPEN" runat="server" ErrorMessage="上架日期必填"></asp:RequiredFieldValidator>
         <p>下架日期</p>
         <asp:TextBox ID="ITEM_CLOSE" TextMode="Date" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ControlToValidate="ITEM_CLOSE" runat="server" ErrorMessage="下架日期必填"></asp:RequiredFieldValidator>
         <p>商品狀態</p>
         <asp:DropDownList ID="ITEM_STATUS" runat="server">
             <asp:ListItem Value="Y">上架</asp:ListItem>

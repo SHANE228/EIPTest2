@@ -6,6 +6,7 @@
     <asp:DropDownList ID="DropDownList1" runat="server"></asp:DropDownList>
     <p>商品名稱</p>
     <asp:TextBox ID="ITEM_TITLE" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="ITEM_TITLE" runat="server" ErrorMessage="商品名稱必填"></asp:RequiredFieldValidator>
     <p>販促地點</p>
          <asp:RadioButton ID="RadioButton1" runat="server" Text="ESkyMall" GroupName="Mall" />
         <asp:RadioButton ID="RadioButton2" runat="server" Text="EdaMall" GroupName="Mall" /><br />
@@ -15,6 +16,7 @@
     <asp:FileUpload ID="FileUpload1" runat="server" />
     <p>商品內容</p>
     <asp:TextBox ID="ITEM_DESCR" TextMode="MultiLine" Height="122px" Width="273px" runat="server"></asp:TextBox><br />
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="ITEM_DESCR" runat="server" ErrorMessage="商品內容必填"></asp:RequiredFieldValidator>
     <p>商品數量</p>
     <asp:TextBox ID="ITEM_COUNT" runat="server"></asp:TextBox>
     <p>商品金額</p>

@@ -4,17 +4,34 @@
 
 <html lang="zh">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <style>
+        .menu {
+            height: 200px;
+            width: 170px;
+            background-color: pink;
+            float: left;
+        }
 
+        .menus {
+            height: 100vh;
+            width: 170px;
+            background-color: aliceblue;
+            float: left;
+        }
+        .submit{
+            text-align:center;
+        }
+    </style>
 </head>
 <body>
-<form runat="server">
+    <form method="post" runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -34,7 +51,6 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -43,19 +59,40 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">後端管理介面:商品促銷資訊平台</a>
                 </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                     
-                    </ul>
-                </div>
+                <a class="navbar-brand" runat="server" >後端管理介面:商品促銷資訊平台</a>
+            </div>
+            <div class="navbar-collapse collapse">
+            </div>
+        </div>
+        <div class="menu">
+            <div class="submit">
+                <span>Login</span>
+            </div>
+            <p>帳號<input id="Text1" name="name1" size="10" type="text" /></p>
+            <br />
+            <p>密碼<input id="Text2" name2="name2" size="10" type="text" /></p>
+            <br />
+            <div class="submit">
+                <input type="submit" name="login" value="登入" />
+                <input type="submit" name="leave" value="登出" />
+            </div>
+            <div class="menus">
+                <ul class="nav navbar-nav">
+                    <li><a runat="server" href="~/WebAdmin/SelectMember">會員帳號管理</a></li>
+                    <li><a runat="server" href="~/WebAdmin/Category/CommodityCategory">商品類別管理</a></li>
+                    <li><a runat="server" href="~/WebAdmin/Commodity/Commodity">商品管理</a></li>
+                    <li><a runat="server" href="~/WebAdmin/Bulletin/Bulletin">促銷公告管理</a></li>
+                    <li><a runat="server" href="~/">報表:會員喜好查詢</a></li>
+                    <li><a runat="server" href="~/">報表:會員資料分析</a></li>
+                </ul>
+
             </div>
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-   </form>
+    </form>
 </body>
 </html>

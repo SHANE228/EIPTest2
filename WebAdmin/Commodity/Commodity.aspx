@@ -25,7 +25,7 @@
         <%
             foreach (Hashtable ht in _arrayList)
             {
-
+                
         %>
             <%string msg = ht["ITEM_STATUS"].ToString(); %>
             <%string str=ht["ITEM_OPEN"].ToString();
@@ -52,6 +52,7 @@
             %></td>
             <td><%=ct.ToString("yyyy/MM/dd") %></td>
             <td><%=mt.ToString("yyyy/MM/dd") %></td>
+            <%--每列導出編輯與刪除 用get傳遞商品代號編號--%>
             <td><a href="EditCommodity.aspx?id=<%=ht["ITEM_ID"].ToString()%>">編輯&nbsp;</a></td>
             <td><a href="DeleteCommodity.aspx?id=<%=ht["ITEM_ID"].ToString()%>">刪除</a></td>
         </tr>

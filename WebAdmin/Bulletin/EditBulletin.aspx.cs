@@ -63,9 +63,11 @@ namespace EIPTest.WebAdmin.Bulletin
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            string result = System.Text.RegularExpressions.Regex.Replace(TextBox3.Text, "[-]", "");
+            string result2 = System.Text.RegularExpressions.Regex.Replace(TextBox4.Text, "[-]", "");
             int rQuery = Int32.Parse(Request.QueryString["id"]);
             StringBuilder sb = new StringBuilder();
-            sb.Append("UPDATE NOTICE_DETAIL SET NOTICE_TOPIC='"+TextBox1.Text+"', NOTICE_CONTENT='"+TextBox2.Text+"', NOTICE_OPEN="+TextBox3.Text+",NOTICE_CLOSE="+TextBox4.Text+ ",MODIFY_TIME=SYSDATE WHERE NOTICE_ID=" + rQuery);
+            sb.Append("UPDATE NOTICE_DETAIL SET NOTICE_TOPIC='"+TextBox1.Text+"', NOTICE_CONTENT='"+TextBox2.Text+"', NOTICE_OPEN="+result+",NOTICE_CLOSE="+result2+ ",MODIFY_TIME=SYSDATE WHERE NOTICE_ID=" + rQuery);
             db.UpdateDB(sb.ToString());
             Response.Redirect("~/WebAdmin/Bulletin/Bulletin.aspx");
         }
