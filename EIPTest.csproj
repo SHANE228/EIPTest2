@@ -162,6 +162,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="PIC\ac.jpg" />
     <Content Include="ProductBrowse\ProductBrowse.aspx" />
+    <Content Include="ProductBrowse\ProductContent.aspx" />
     <Content Include="WebAdmin\AdminDefault.aspx" />
     <Content Include="WebAdmin\Bulletin\Bulletin.aspx" />
     <Content Include="WebAdmin\Bulletin\CreateBulletin.aspx" />
@@ -310,6 +311,13 @@
     </Compile>
     <Compile Include="ProductBrowse\ProductBrowse.aspx.designer.cs">
       <DependentUpon>ProductBrowse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductBrowse\ProductContent.aspx.cs">
+      <DependentUpon>ProductContent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductBrowse\ProductContent.aspx.designer.cs">
+      <DependentUpon>ProductContent.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

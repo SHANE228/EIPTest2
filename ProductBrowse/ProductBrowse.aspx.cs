@@ -46,7 +46,12 @@ namespace EIPTest.ProductBrowse
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //if (!IsPostBack)
+            //{
+                StringBuilder sba = new StringBuilder();
+                sba.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y'");
+                _arrayList = db.QueryDB(sba.ToString());
+            //}
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -55,10 +60,12 @@ namespace EIPTest.ProductBrowse
             StringBuilder sb4 = new StringBuilder();
 
             ArrayList rrayList2 = new ArrayList();
-            sb3.Append("SELECT TYPE_ID FROM ITEM_TYPE WHERE TYPE_NAME ='" + DropDownList1.Text + "'");
+            try
+            {
+                 sb3.Append("SELECT TYPE_ID FROM ITEM_TYPE WHERE TYPE_NAME ='" + DropDownList1.Text + "'");
             string BData = db.GetOneColumnData(sb3.ToString());
             int intBData = Int32.Parse(BData);
-            sb4.Append("SELECT TYPE_NAME FROM ITEM_TYPE WHERE TYPE_UPPER=" + intBData);
+            sb4.Append("SELECT TYPE_NAME FROM ITEM_TYPE WHERE TYPE_UPPER=" + BData);
             rrayList2 = db.QueryDB(sb4.ToString());
             if (rrayList2.Count > 0)
             {
@@ -70,11 +77,73 @@ namespace EIPTest.ProductBrowse
                 }
 
             }
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            if(DropDownList2.Text == "" && TextBox1.Text=="")
+            {
+                StringBuilder sb5 = new StringBuilder();
+                sb5.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' AND ITEM_PLACE ='" + DropDownList3.Text +"'");
+                Response.Write(sb5.ToString());
+                _arrayList = db.QueryDB(sb5.ToString());
 
+            }
+            else if (DropDownList3.Text=="" && TextBox1.Text == "")
+            {
+                StringBuilder ssb = new StringBuilder();
+                ssb.Append("SELECT TYPE_ID FROM ITEM_TYPE WHERE TYPE_NAME='" + DropDownList2.Text + "'");
+                string typeID = db.GetOneColumnData(ssb.ToString());
+                //int intTypeID = Int32.Parse(typeID);
+                StringBuilder sb5 = new StringBuilder();
+                sb5.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' AND TYPE_ID=" + typeID);
+                _arrayList = db.QueryDB(sb5.ToString());
+                Response.Write(sb5.ToString());
+            }
+            else if(TextBox1.Text=="")
+            {
+                StringBuilder ssb = new StringBuilder();
+                ssb.Append("SELECT TYPE_ID FROM ITEM_TYPE WHERE TYPE_NAME='" + DropDownList2.Text + "'");
+                string typeID = db.GetOneColumnData(ssb.ToString());
+                //int intTypeID = Int32.Parse(typeID);
+                StringBuilder sb5 = new StringBuilder();
+                sb5.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' AND ITEM_PLACE ='" + DropDownList3.Text + "' AND TYPE_ID=" + typeID );
+                _arrayList = db.QueryDB(sb5.ToString());
+                Response.Write(sb5.ToString());
+            }
+            else if (DropDownList2.Text=="")
+            {
+                StringBuilder sb5 = new StringBuilder();
+                sb5.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' AND ITEM_TITLE LIKE '%" + TextBox1.Text + "%' AND ITEM_PLACE ='" + DropDownList3.Text + "'");
+                Response.Write(sb5.ToString());
+                _arrayList = db.QueryDB(sb5.ToString());
+            }
+            else if (DropDownList3.Text == "")
+            {
+                StringBuilder ssb = new StringBuilder();
+                ssb.Append("SELECT TYPE_ID FROM ITEM_TYPE WHERE TYPE_NAME='" + DropDownList2.Text + "'");
+                string typeID = db.GetOneColumnData(ssb.ToString());
+                //int intTypeID = Int32.Parse(typeID);
+                StringBuilder sb5 = new StringBuilder();
+                sb5.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' AND ITEM_TITLE LIKE '%" + TextBox1.Text + "%' AND TYPE_ID=" + typeID);
+                _arrayList = db.QueryDB(sb5.ToString());
+                Response.Write(sb5.ToString());
+            }
+            else
+            {
+                StringBuilder ssb = new StringBuilder();
+                ssb.Append("SELECT TYPE_ID FROM ITEM_TYPE WHERE TYPE_NAME='" + DropDownList2.Text + "'");
+                string typeID = db.GetOneColumnData(ssb.ToString());
+                //int intTypeID = Int32.Parse(typeID);
+                StringBuilder sb5 = new StringBuilder();
+                sb5.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' AND (ITEM_TITLE LIKE '%" + TextBox1.Text + "%' AND ITEM_PLACE ='" + DropDownList3.Text + "' AND TYPE_ID=" + typeID + ")");
+                _arrayList = db.QueryDB(sb5.ToString());
+                Response.Write(sb5.ToString());
+            }
         }
     }
 }

@@ -18,6 +18,7 @@ namespace EIPTest.lib.Org
 {
     public class EmpObject
     {
+        public string serial_Id;
         public string NationalId;
         public string empId;
         public string empName;
@@ -35,6 +36,7 @@ namespace EIPTest.lib.Org
             Hashtable ht = this.GetEmpBasic();
             if(ht.Count > 0 )
             {
+                serial_Id = (string)ht["SERIAL_ID"];
                 NationalId= (string)ht["NATIONAL_ID"];
                 empId = (string)ht["EMP_ID"];
                 empName = (string)ht["EMP_NAME"];
@@ -52,7 +54,7 @@ namespace EIPTest.lib.Org
             Hashtable _hm = new Hashtable();
             Db = new DataBase();
             StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT NATIONAL_ID, EMP_ID, EMP_NAME, EMP_PASSWORD, EMP_EMAIL, EMP_SEX, EMP_PHONE, EMP_PLACE FROM SJ0007_LOGIN ");
+            sb.Append("SELECT SERIAL_ID, NATIONAL_ID, EMP_ID, EMP_NAME, EMP_PASSWORD, EMP_EMAIL, EMP_SEX, EMP_PHONE, EMP_PLACE FROM SJ0007_LOGIN ");
 
 
             ArrayList resultList = Db.QueryDB(sb.ToString());
