@@ -37,11 +37,12 @@ namespace EIPTest.Login
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            //抓取EMAIL
             StringBuilder ssb = new StringBuilder();
             ssb.Append("SELECT EMP_EMAIL FROM SJ0007_LOGIN WHERE EMP_ID = '" + TextBox1.Text + "'");
             string to = db.GetOneColumnData(ssb.ToString());
 
-
+            //檢查帳號是否有該帳號
             StringBuilder sb = new StringBuilder();
             sb.Append("SELECT COUNT(*) FROM SJ0007_LOGIN WHERE EMP_ID = '" + TextBox1.Text + "'");
             string gocl = db.GetOneColumnData(sb.ToString());
@@ -55,7 +56,7 @@ namespace EIPTest.Login
 
                 try
                 {
-                    //桌機無法寄信，筆電可以
+                    //寄信流程
                     MailMessage msg = new MailMessage();
                     msg.To.Add(new MailAddress(to));
                     msg.From = new MailAddress("shin-jan@outlook.com", "新展");

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace EIPTest.lib.AES
 {
@@ -42,8 +43,8 @@ namespace EIPTest.lib.AES
 
             Validate_KeyIV_Length(key, iv);
             Aes aes = Aes.Create();
-            aes.Mode = CipherMode.CBC;//非必須，但加了較安全
-            aes.Padding = PaddingMode.PKCS7;//非必須，但加了較安全
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.PKCS7;
 
             ICryptoTransform transform = aes.CreateEncryptor(Encoding.UTF8.GetBytes(key), Encoding.UTF8.GetBytes(iv));
 
@@ -64,8 +65,8 @@ namespace EIPTest.lib.AES
 
             Validate_KeyIV_Length(key, iv);
             Aes aes = Aes.Create();
-            aes.Mode = CipherMode.CBC;//非必須，但加了較安全
-            aes.Padding = PaddingMode.PKCS7;//非必須，但加了較安全
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.PKCS7;
 
             ICryptoTransform transform = aes.CreateDecryptor(Encoding.UTF8.GetBytes(key), Encoding.UTF8.GetBytes(iv));
             byte[] bEnBase64String = null;
@@ -84,6 +85,59 @@ namespace EIPTest.lib.AES
             //解密成功
             return Encoding.UTF8.GetString(outputData);
 
+        }
+        //防止SQL injection 查詢輸入字串消除以下字囊
+        public static string ReplaceSQLChar(string str)
+        {
+            if (str == String.Empty)
+                return String.Empty;
+            str = str.Replace("'", "");
+            str = str.Replace(";", "");
+            str = str.Replace(",", "");
+            str = str.Replace("?", "");
+            str = str.Replace("<", "");
+            str = str.Replace(">", "");
+            str = str.Replace("(", "");
+            str = str.Replace(")", "");
+            str = str.Replace("@", "");
+            str = str.Replace("=", "");
+            str = str.Replace("+", "");
+            str = str.Replace("*", "");
+            str = str.Replace("&", "");
+            str = str.Replace("#", "");
+            str = str.Replace("%", "");
+            str = str.Replace("$", "");
+
+            //刪除與資料庫相關的字囊
+            str = Regex.Replace(str, "select", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "insert", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "delete from", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "count", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "drop table", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "truncate", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "asc", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "mid", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "char", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "xp_cmdshell", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "exec master", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "net localgroup administrators", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "and", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "net user", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "or", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "net", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "-", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "delete", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "drop", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "script", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "update", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "and", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "chr", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "master", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "truncate", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "declare", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "mid", "", RegexOptions.IgnoreCase);
+
+            return str;
         }
     }
 }

@@ -30,6 +30,7 @@ namespace EIPTest.Login
             }
             if (!IsPostBack)
             {
+                //資料庫抓取個人資料
                 EmpObject empBasic = new EmpObject(Session["empId"].ToString());
                 EMP_Name.Text = empBasic.empName;
                 EMP_Mail.Text = empBasic.empEmail;
@@ -40,9 +41,11 @@ namespace EIPTest.Login
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            //更改個人檔案
+            string name = MyAesCryptography.ReplaceSQLChar(EMP_Name.Text);
             EmpObject empBasics = new EmpObject(Session["empId"].ToString());
             StringBuilder sb = new StringBuilder();
-            sb.Append("UPDATE SJ0007_LOGIN SET EMP_NAME ='" + EMP_Name.Text + "', EMP_EMAIL = '" + EMP_Mail.Text + "', EMP_PHONE = '" + EMP_Phone.Text + "', EMP_PLACE = '" + DropDownList1.Text + "', MODIFY_TIME = SYSDATE ");
+            sb.Append("UPDATE SJ0007_LOGIN SET EMP_NAME ='" + name + "', EMP_EMAIL = '" + EMP_Mail.Text + "', EMP_PHONE = '" + EMP_Phone.Text + "', EMP_PLACE = '" + DropDownList1.Text + "', MODIFY_TIME = SYSDATE ");
             sb.Append("WHERE EMP_ID = '" + empBasics.empId + "'");
             db.UpdateDB(sb.ToString());
             Response.Write(sb.ToString());

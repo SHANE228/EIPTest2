@@ -39,24 +39,30 @@ namespace EIPTest.Login
             StringBuilder sba = new StringBuilder();
             StringBuilder sb = new StringBuilder();
             EmpObject empBasic = new EmpObject(Session["empId"].ToString());
-            string base64NID = MyAesCryptography.Encrypt(myKey, myIV, TextBox2.Text);
-            string base64NID2 = MyAesCryptography.Encrypt(myKey, myIV, TextBox3.Text);
-            sba.Append("SELECT EMP_PASSWORD FROM SJ0007_LOGIN WHERE EMP_PASSWORD = '" + base64NID + "'");
+            string pass1 = MyAesCryptography.ReplaceSQLChar(TextBox2.Text);
+            string pass2 = MyAesCryptography.ReplaceSQLChar(TextBox3.Text);
+            //檢查TEXTBOX1,2密碼是否相同
+            string base64NID = MyAesCryptography.Encrypt(myKey, myIV, pass1);
+            string base64NID2 = MyAesCryptography.Encrypt(myKey, myIV, pass2);
+
+            //抓取資料庫密碼並解碼
+            sba.Append("SELECT EMP_PASSWORD FROM SJ0007_LOGIN WHERE EMP_ID = '" + empBasic.empId + "'");
             string passNID = db.GetOneColumnData(sba.ToString());
             string ase64NID = MyAesCryptography.Decrypt(myKey, myIV, passNID);
 
 
             if (base64NID == base64NID2)
             {
-                if (TextBox2.Text == ase64NID)
+                if (pass1 == ase64NID)
                 {
                     Label2.Text = "密碼相同";
                 }
                 else
                 {
+                    //修改密碼
                     sb.Append("UPDATE SJ0007_LOGIN SET EMP_PASSWORD ='" + base64NID + "'WHERE EMP_ID='" + empBasic.empId + "'");
                     db.UpdateDB(sb.ToString());
-
+                    Response.Write("<Script language='JavaScript'>alert('已成功完成密碼修改');</Script>");
                 }
 
             }
@@ -64,7 +70,7 @@ namespace EIPTest.Login
             {
                 Label2.Text = "請填相同密碼";
             }
-            Response.Write("<Script language='JavaScript'>alert('已成功完成密碼修改');</Script>");
+
         }
     }
 }

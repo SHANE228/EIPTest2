@@ -42,7 +42,6 @@ namespace EIPTest.lib.Org
                 empName = (string)ht["EMP_NAME"];
                 empPassword = (string)ht["EMP_PASSWORD"];
                 empEmail= (string)ht["EMP_EMAIL"];
-                //empSex = (string)ht["EMP_SEX"];
                 empPhone= (string)ht["EMP_PHONE"];
                 empPlace=(string)ht["EMP_PLACE"];
             }

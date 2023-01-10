@@ -23,39 +23,6 @@ namespace EIPTest.lib.Connect
 
         }
 
-        //public DataTable GetTable(string sql)
-        //{
-        //    try
-        //    {
-        //        int status = 0;
-        //        DataTable dt = new DataTable();
-
-        //        if (!String.IsNullOrEmpty(sql))
-        //        {
-        //            open();
-        //            OracleDataAdapter sda = new OracleDataAdapter(sql, Conn);
-        //            DataSet ds = new DataSet();
-        //            sda.Fill(ds);
-        //            if (ds.Tables.Count > 0)
-        //            {
-        //                dt = ds.Tables[0];
-        //                status = 1;
-        //            }
-        //            close();
-        //        }
-        //        if (status == 1)
-        //            return dt;
-        //        else
-        //            return null;
-        //    }
-        //    catch
-        //    {
-        //        return null;
-        //    }
-        //}
-        ///**
-        // * 新增/刪除/修改
-        // */
 
         public int UpdateDB(string sql)
         {
@@ -81,83 +48,6 @@ namespace EIPTest.lib.Connect
 
         }
 
-        public int ExecuteStoreProcedure(string cmdTxt, OracleParameter[] parms)
-        {
-
-
-            open();
-            foreach (OracleParameter parm in parms)
-                cmd.Parameters.Add(parm);
-
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = cmdTxt;
-            try
-            {
-                return cmd.ExecuteNonQuery();
-            }
-            catch
-            {
-                return -1;
-            }
-            finally
-            {
-
-                close();
-            }
-
-        }
-
-        public int ExecuteStoreProcedure(string cmdTxt)
-        {
-
-            open();
-
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = cmdTxt;
-
-            try
-            {
-                return cmd.ExecuteNonQuery();
-            }
-            catch (Exception e)
-            {
-                return -1;
-            }
-            finally
-            {
-
-                close();
-            }
-
-        }
-
-        /**
-          * query CLOB 物件
-         */
-
-        //public int ExeDBClob(string sql, string ParameterName, object Value)
-        //{
-        //    open();
-        //    cmd.Parameters.Clear();
-        //    cmd.CommandType = CommandType.Text;
-        //    cmd.CommandText = sql;
-        //    OracleParameter op = new OracleParameter(ParameterName, OracleDbType.Clob);
-        //    op.Value = Value;
-        //    cmd.Parameters.Add(op);
-        //    try
-        //    {
-        //        return cmd.ExecuteNonQuery();
-        //    }
-        //    catch
-        //    {
-        //        return -1;
-        //    }
-        //    finally
-        //    {
-        //        close();
-        //    }
-
-        //}
         ///**
         //  * Query DB 
         //  */
@@ -349,72 +239,6 @@ namespace EIPTest.lib.Connect
 
             return return_seq;
         }
-
-        //取得欄位名稱
-        //public string GetColnumList(string Sql)
-        //{
-
-        //    open();
-        //    cmd.Parameters.Clear();
-        //    cmd.CommandType = CommandType.Text;
-        //    cmd.CommandText = Sql;
-
-        //    OracleDataReader dr = cmd.ExecuteReader();
-        //    StringBuilder sb = new StringBuilder();
-        //    try
-        //    {
-        //        int drAcount = dr.FieldCount;
-
-        //        for (int a = 0; a < drAcount; a++)
-        //        {
-        //            sb.Append(dr.GetName(a) + ",");
-        //        }
-        //    }
-        //    catch
-        //    {
-
-        //    }
-        //    finally
-        //    {
-        //        close();
-        //    }
-
-        //    return sb.ToString().Substring(0, sb.ToString().Length - 1);
-        //}
-
-        //取得資料型別
-        //public string GetDataType(string Sql)
-        //{
-
-        //    open();
-        //    cmd.Parameters.Clear();
-        //    cmd.CommandType = CommandType.Text;
-        //    cmd.CommandText = Sql;
-
-        //    OracleDataReader dr = cmd.ExecuteReader();
-        //    StringBuilder sb = new StringBuilder();
-        //    try
-        //    {
-        //        int drAcount = dr.FieldCount;
-
-        //        for (int a = 0; a < drAcount; a++)
-        //        {
-        //            sb.Append(dr.GetDataTypeName(a) + ",");
-        //        }
-        //    }
-        //    catch
-        //    {
-
-        //    }
-        //    finally
-        //    {
-        //        close();
-        //    }
-
-        //    return sb.ToString().Substring(0, sb.ToString().Length - 1);
-        //}
-
-
 
         /// <summary>
         /// 取得最新PK ID

@@ -7,28 +7,28 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>查詢會員資料</h1>
     <form method="get">
-    姓名 :<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-    <asp:Button ID="Button1" runat="server" Text="查詢" OnClick="Button1_Click" />
-    身分證字號 :<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-    <asp:Button ID="Button2" runat="server" Text="查詢" OnClick="Button2_Click" />
-    <tr>
+        姓名 :<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <asp:Button ID="Button1" runat="server" Text="查詢" OnClick="Button1_Click" />
+        身分證字號 :<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+        <asp:Button ID="Button2" runat="server" Text="查詢" OnClick="Button2_Click" />
         <td>出生日期：</td>
-        <td>
-            <select id="birth_year" name="year" onchange="setDays(this,birth_month,birth_day);">
+        <span>
+            <select name="year" id="year">
                 <option value="">年</option>
-
             </select>
-            <select id="birth_month" name="month" onchange="setDays(birth_year,this,birth_day);">
+        </span>
+        <span>
+            <select name="month" id="month">
                 <option value="">月</option>
-
             </select>
-            <select id="birth_day" name="day">
+        </span>
+        <span>
+            <select name="day" id="day">
                 <option value="">日</option>
-
-            </select></td>
-    </tr>
-    <asp:Button ID="Button3" runat="server" Text="查詢" OnClick="Button3_Click" /><br />
-</form>
+            </select>
+        </span>
+        <asp:Button ID="Button3" runat="server" Text="查詢" OnClick="Button3_Click" /><br />
+    </form>
     <%  
 
         if (_arrayList.Count > 0)
@@ -55,11 +55,12 @@
         <%
             string myKey = "1234567812345678";
             string myIV = "1234567812345678";
-            string NID= ht["NATIONAL_ID"].ToString();
-            
-            %>
+            string NID = ht["NATIONAL_ID"].ToString();
+
+        %>
         <%Int32 intSex = Int32.Parse((ht["EMP_SEX"].ToString())); %>
-        <%DateTime dt = DateTime.Parse(ht["EMP_BIRTHDAY"].ToString()); %>
+        <%        string str=ht["EMP_BIRTHDAY"].ToString();
+                DateTime birthday =DateTime.ParseExact(str,"yyyyMMdd",null);  %>
         <%DateTime ct = DateTime.Parse(ht["CREATE_TIME"].ToString()); %>
         <%DateTime mt = DateTime.Parse(ht["MODIFY_TIME"].ToString()); %>
         <tr>
@@ -70,7 +71,7 @@
             <td><%=(intSex==1)?"男":"女" %>&nbsp;</td>
             <td><%=ht["EMP_PHONE"].ToString() %>&nbsp;</td>
             <td><%=ht["EMP_PLACE"].ToString() %>&nbsp;</td>
-            <td><%=dt.ToString("yyyy/MM/dd") %>&nbsp;</td>
+            <td><%=birthday.ToString("yyyy/MM/dd") %>&nbsp;</td>
             <td><%=ct.ToString("yyyy/MM/dd") %>&nbsp;</td>
             <td><%=mt.ToString("yyyy/MM/dd") %>&nbsp;</td>
         </tr>
@@ -80,60 +81,90 @@
 
     <script type="text/javascript" src="Scripts/jquery-1.5.1.js"></script>
     <script type="text/javascript">
+        var yearSelect = document.getElementById("year");
+        var monthSelect = document.getElementById("month");
+        var daySelect = document.getElementById("day");
 
-        $(document).ready(function () {
-            var i = -1;
-            // 新增年份，從1910年開始
-            for (i = 1910; i <= new Date().getFullYear(); i++) {
-                addOption(birth_year, i, i - 1909);
-                /*// 預設選中1988年
-                if (i == 1988) {
-                    birth_year.options[i-1910].selected = true;
-                }*/
-            }
-            // 新增月份
-            for (i = 1; i <= 12; i++) {
-                addOption(birth_month, i, i);
-            }
-            // 新增天份，先預設31天
-            for (i = 1; i <= 31; i++) {
-                addOption(birth_day, i, i);
+        var months = ['01', '02', '03', '04',
+            '05', '06', '07', '08', '09', '10',
+            '11', '12'];
+
+        //Months are always the same
+        (function populateMonths() {
+            for (var i = 0; i < months.length; i++) {
+                var option = document.createElement('option');
+                option.textContent = months[i];
+                monthSelect.appendChild(option);
             }
 
+        })();
 
+        var previousDay;
 
-            //$("#birth_month"). birth_year  birth_day
-        });
+        function populateDays(month) {
 
+            //Holds the number of days in the month
+            var dayNum;
+            //Get the current year
+            var year = yearSelect.value;
 
-        // 設定每個月份的天數
-        function setDays(year, month, day) {
-            var monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-            var yea = year.options[year.selectedIndex].text;
-            var mon = month.options[month.selectedIndex].text;
-            var num = monthDays[mon - 1];
-            if (mon == 2 && isLeapYear(yea)) {
-                num++;
+            if (month === '01' || month === '03' ||
+                month === '05' || month === '07' || month === '08'
+                || month === '10' || month === '12') {
+                dayNum = 31;
+            } else if (month === '4' || month === '6'
+                || month === '9' || month === '11') {
+                dayNum = 30;
+            } else {
+                //Check for a leap year
+                if (new Date(year, 1, 29).getMonth() === 1) {
+                    dayNum = 29;
+                } else {
+                    dayNum = 28;
+                }
             }
-            for (var j = day.options.length - 1; j >= num; j--) {
-                day.remove(j);
+            //Insert the correct days into the day <select>
+            for (let i = 1; i <= dayNum; i++) {
+                const option = document.createElement("option");
+                option.textContent = i;
+                daySelect.appendChild(option);
             }
-            for (var i = day.options.length; i <= num; i++) {
-                addOption(birth_day, i, i);
+            if (previousDay) {
+                daySelect.value = previousDay;
+                if (daySelect.value === "") {
+                    daySelect.value = previousDay - 1;
+                }
+                if (daySelect.value === "") {
+                    daySelect.value = previousDay - 2;
+                }
+                if (daySelect.value === "") {
+                    daySelect.value = previousDay - 3;
+                }
             }
         }
 
-        // 判斷是否閏年
-        function isLeapYear(year) {
-            return (year % 4 == 0 || (year % 100 == 0 && year % 400 == 0));
+        function populateYears() {
+            //Get the current year as a number
+            var year = new Date().getFullYear();
+            //Make the previous 100 years be an option
+            for (let i = 0; i < 101; i++) {
+                const option = document.createElement("option");
+                option.textContent = year - i;
+                yearSelect.appendChild(option);
+            }
         }
 
-        // 向select尾部新增option
-        function addOption(selectbox, text, value) {
-            var option = document.createElement("option");
-            option.text = text;
-            option.value = value;
-            selectbox.options.add(option);
+        populateDays(monthSelect.value);
+        populateYears();
+
+        yearSelect.onchange = function () {
+            populateDays(monthSelect.value);
+        }
+        monthSelect.onchange = function () {
+            populateDays(monthSelect.value);
+        }
+        daySelect.onchange = function () {
+            previousDay = daySelect.value;
         }
     </script>
 </asp:Content>

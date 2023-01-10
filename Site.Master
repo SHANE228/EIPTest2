@@ -81,8 +81,8 @@
                 %>
                 <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">註冊</asp:LinkButton>
                 <asp:LinkButton ID="LinkButton2" runat="server" OnClick="LinkButton2_Click">忘記密碼</asp:LinkButton><br />
-                <asp:Label ID="Label2" runat="server" Text="帳號"></asp:Label><asp:TextBox ID="AdminLogin" runat="server" Width="105px"></asp:TextBox><br />
-                <asp:Label ID="Label3" runat="server" Text="密碼"></asp:Label><asp:TextBox ID="AdminPassword" TextMode="Password" runat="server" Width="105px"></asp:TextBox>
+                <asp:Label ID="Label2" runat="server" Text="帳號"></asp:Label><asp:TextBox ID="AdminLogin" runat="server"  Width="105px"></asp:TextBox><br />
+                <asp:Label ID="Label3" runat="server" Text="密碼"></asp:Label><asp:TextBox ID="AdminPassword" TextMode="Password"  runat="server"  Width="105px"></asp:TextBox>
                 <% }%>
             </div>
             <div class="submit">

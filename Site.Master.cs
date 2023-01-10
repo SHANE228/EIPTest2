@@ -30,21 +30,27 @@ namespace EIPTest
             if (Session["empId"] != null)
             {
                 EmpObject empBasic = new EmpObject(Session["empId"].ToString());
-                Label1.Text = "歡迎登入" + "\r\n" + " 帳號:" + empBasic.empId;
+                Label1.Text = "歡迎登入" + "<br>" + " 帳號:" + empBasic.empId + "<br>" + "姓名:" + empBasic.empName;
             }
         }
 
         protected void btLogin_Click(object sender, EventArgs e)
         {
+            //抓取密碼
+            string replace1 = MyAesCryptography.ReplaceSQLChar(AdminLogin.Text);
+            string replace2 = MyAesCryptography.ReplaceSQLChar(AdminPassword.Text);
             StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT EMP_PASSWORD FROM SJ0007_LOGIN WHERE EMP_ID= '" + AdminLogin.Text + "'");
+            sb.Append("SELECT EMP_PASSWORD FROM SJ0007_LOGIN WHERE EMP_ID= '" + replace1 + "'");
             string _password = db.GetOneColumnData(sb.ToString());
+            //解碼
             string decryptText = MyAesCryptography.Decrypt(myKey, myIV, _password);
+            //抓取帳號
             StringBuilder apSb = new StringBuilder();
-            apSb.Append("SELECT EMP_ID FROM SJ0007_LOGIN WHERE EMP_ID= '" + AdminLogin.Text + "'");
+            apSb.Append("SELECT EMP_ID FROM SJ0007_LOGIN WHERE EMP_ID= '" + replace1 + "'");
             string _account = db.GetOneColumnData(apSb.ToString());
 
-            if (AdminLogin.Text == _account && AdminPassword.Text == decryptText)
+            //辨識帳號密碼
+            if (replace1 == _account && replace2 == decryptText)
             {
                 Session["empId"] = _account;
                 Response.Redirect("~/Default.aspx");
