@@ -35,23 +35,23 @@
             <%DateTime ct = DateTime.Parse(ht["CREATE_TIME"].ToString()); %>
             <%DateTime mt = DateTime.Parse(ht["MODIFY_TIME"].ToString()); %>
         <tr>
-            <td><%=ht["ITEM_ID"].ToString() %></td>
-            <td><%=ht["TYPE_NAME"].ToString() %></td>
-            <td><%=ht["ITEM_TITLE"].ToString() %></td>
-            <td><%=ht["ITEM_PLACE"].ToString() %></td>
-            <td><img src="<%=ht["ITEM_PIC"].ToString()%>" width="50" /></td>
-            <td><%=ht["ITEM_DESCR"].ToString()  %></td>
-            <td><%=ht["ITEM_COUNT"].ToString() %></td>
-            <td><%=ht["ITEM_PRICE"].ToString() %></td>
-            <td><%=open.ToString("yyyy/MM/dd")%></td>
-            <td><%=close.ToString("yyyy/MM/dd")%></td>
+            <td><%=ht["ITEM_ID"].ToString() %>&nbsp;</td>
+            <td><%=ht["TYPE_NAME"].ToString() %>&nbsp;</td>
+            <td><%=ht["ITEM_TITLE"].ToString() %>&nbsp;</td>
+            <td><%=ht["ITEM_PLACE"].ToString() %>&nbsp;</td>
+            <td><img src="<%=ht["ITEM_PIC"].ToString()%>" width="50" />&nbsp;</td>
+            <td><%=ht["ITEM_DESCR"].ToString()  %>&nbsp;</td>
+            <td><%=ht["ITEM_COUNT"].ToString() %>&nbsp;</td>
+            <td><%=ht["ITEM_PRICE"].ToString() %>&nbsp;</td>
+            <td><%=open.ToString("yyyy/MM/dd")%>&nbsp;</td>
+            <td><%=close.ToString("yyyy/MM/dd")%>&nbsp;</td>
             <td><% if (msg == "Y") 
                    {%><span>上架</span> <%}
                    else
                    {%><span>下架</span> <%}
-            %></td>
-            <td><%=ct.ToString("yyyy/MM/dd") %></td>
-            <td><%=mt.ToString("yyyy/MM/dd") %></td>
+            %>&nbsp;</td>
+            <td><%=ct.ToString("yyyy/MM/dd") %>&nbsp;</td>
+            <td><%=mt.ToString("yyyy/MM/dd") %>&nbsp;</td>
             <%--每列導出編輯與刪除 用get傳遞商品代號編號--%>
             <td><a href="EditCommodity.aspx?id=<%=ht["ITEM_ID"].ToString()%>">編輯&nbsp;</a></td>
             <td><a href="DeleteCommodity.aspx?id=<%=ht["ITEM_ID"].ToString()%>">刪除</a></td>

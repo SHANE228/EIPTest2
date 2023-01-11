@@ -95,8 +95,8 @@
                     <li><a runat="server" href="~/WebAdmin/Category/CommodityCategory">商品類別管理</a></li>
                     <li><a runat="server" href="~/WebAdmin/Commodity/Commodity">商品管理</a></li>
                     <li><a runat="server" href="~/WebAdmin/Bulletin/Bulletin">促銷公告管理</a></li>
-                    <li><a runat="server" href="~/">報表:會員喜好查詢</a></li>
-                    <li><a runat="server" href="~/">報表:會員資料分析</a></li>
+                    <li><a runat="server" href="~/WebAdmin/ReportForm/ReportFav">報表:會員喜好查詢</a></li>
+                    <li><a runat="server" href="~/WebAdmin/ReportForm/ReportAnalysis">報表:會員資料分析</a></li>
                 </ul>
                 <% }%>
             </div>

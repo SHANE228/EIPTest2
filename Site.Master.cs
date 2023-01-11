@@ -36,11 +36,14 @@ namespace EIPTest
 
         protected void btLogin_Click(object sender, EventArgs e)
         {
-            //抓取密碼
+            //抓取帳號
             string replace1 = MyAesCryptography.ReplaceSQLChar(AdminLogin.Text);
+
+            //抓取密碼
             string replace2 = MyAesCryptography.ReplaceSQLChar(AdminPassword.Text);
+            string password = MyAesCryptography.Encrypt(myKey, myIV, replace2);
             StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT EMP_PASSWORD FROM SJ0007_LOGIN WHERE EMP_ID= '" + replace1 + "'");
+            sb.Append("SELECT EMP_PASSWORD FROM SJ0007_LOGIN WHERE EMP_PASSWORD= '" + password + "'");
             string _password = db.GetOneColumnData(sb.ToString());
             //解碼
             string decryptText = MyAesCryptography.Decrypt(myKey, myIV, _password);

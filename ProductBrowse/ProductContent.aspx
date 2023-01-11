@@ -34,7 +34,7 @@
             <td><%=ht["ITEM_PRICE"].ToString() %></td>
             <td><%=open.ToString("yyyy/MM/dd")%>&nbsp;</td>
             <td><%=close.ToString("yyyy/MM/dd")%>&nbsp;</td>
-            <td><%=ht["ITEM_DESCR"].ToString() %></td>
+            <td><%=ht["ITEM_DESCR"].ToString() %>&nbsp;</td>
             <td><asp:Button ID="Button1" runat="server" Text="加入喜好清單" OnClick="Button1_Click" />
                 <asp:Button ID="Button2" runat="server" Text="從喜好清單移除" OnClick="Button2_Click" />
             </td>

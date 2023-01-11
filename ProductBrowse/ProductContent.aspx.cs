@@ -26,11 +26,13 @@ namespace EIPTest.ProductBrowse
         public bool Fao = false;
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (Session["empId"] == null)
             {
                 Response.Redirect("~/Default.aspx");
             }
             int rQuery = Int32.Parse(Request.QueryString["id"]);
+            EmpObject empBasic = new EmpObject(Session["empId"].ToString());
             if (!IsPostBack)
             {
                 //抓取商品內容
@@ -42,12 +44,12 @@ namespace EIPTest.ProductBrowse
                 int intIvc = Int32.Parse(ivc) + 1;
                 StringBuilder sbc = new StringBuilder();
                 sbc.Append("UPDATE ITEM_DETAIL SET ITEM_VIEW_COUNT=" + intIvc + " WHERE ITEM_ID= " + rQuery);
-                db.QueryDB(sbc.ToString());
+                db.UpdateDB(sbc.ToString());
                 Label1.Text = intIvc.ToString();
 
                 //判斷該帳號事先加入喜好清單?
                 StringBuilder ssb = new StringBuilder();
-                ssb.Append("SELECT FAV_STATUS FROM MEMBER_FAVORITE WHERE ITEM_ID=" + rQuery);
+                ssb.Append("SELECT A.FAV_STATUS FROM MEMBER_FAVORITE A, SJ0007_LOGIN B WHERE A.ITEM_ID=" + rQuery + "AND A.MEMBER_ID = B.SERIAL_ID AND B.EMP_ID='" + empBasic.empId + "'");
                 string data = db.GetOneColumnData(ssb.ToString());
                 if (data == "Y")
                 {
@@ -66,17 +68,18 @@ namespace EIPTest.ProductBrowse
             StringBuilder sb = new StringBuilder();
             sb.Append("SELECT A.ITEM_ID, A.TYPE_ID, A.ITEM_TITLE, A.ITEM_PIC, A.ITEM_DESCR, A.ITEM_COUNT, A.ITEM_PRICE, A.ITEM_OPEN, A.ITEM_CLOSE, A.ITEM_STATUS, B.TYPE_NAME FROM ITEM_DETAIL A,ITEM_TYPE B WHERE A.TYPE_ID = B.TYPE_ID AND NOT A.ITEM_STATUS ='D' AND NOT A.ITEM_STATUS ='N' AND A.ITEM_ID="+ rQuery);
             _arrayList = db.QueryDB(sb.ToString());
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            int rQuery = Int32.Parse(Request.QueryString["id"]);
             EmpObject empBasic = new EmpObject(Session["empId"].ToString());
             StringBuilder ssb = new StringBuilder();
-            ssb.Append("SELECT FAV_ID FROM MEMBER_FAVORITE WHERE MEMBER_ID=" + empBasic.serial_Id);
+            ssb.Append("SELECT FAV_ID FROM MEMBER_FAVORITE WHERE FAV_ID=" + rQuery + "AND MEMBER_ID ="+empBasic.serial_Id);
             string BData = db.GetOneColumnData(ssb.ToString());
             if (BData == "")
             {
-                int rQuery = Int32.Parse(Request.QueryString["id"]);
                 string serial_ID = db.GetSequence("SJ0007_FAV");
                 StringBuilder sb1 = new StringBuilder();
                 sb1.Append("INSERT INTO MEMBER_FAVORITE ( FAV_ID, MEMBER_ID, ITEM_ID, FAV_STATUS, CREATE_TIME, WHO_CREATE, MODIFY_TIME, WHO_MODIFY )");
@@ -85,7 +88,6 @@ namespace EIPTest.ProductBrowse
             }
             else
             {
-                int rQuery = Int32.Parse(Request.QueryString["id"]);
                 StringBuilder sb1 = new StringBuilder();
                 sb1.Append("UPDATE MEMBER_FAVORITE SET FAV_STATUS = 'Y', MODIFY_TIME= SYSDATE, DELETE_TIME=NULL WHERE ITEM_ID=" + rQuery);
                 db.UpdateDB(sb1.ToString());

@@ -175,6 +175,9 @@
     <Content Include="WebAdmin\Commodity\CreateCommodity.aspx" />
     <Content Include="WebAdmin\Commodity\DeleteCommodity.aspx" />
     <Content Include="WebAdmin\Commodity\EditCommodity.aspx" />
+    <Content Include="WebAdmin\ReportForm\ReportAnalysis.aspx" />
+    <Content Include="WebAdmin\ReportForm\ReportContent.aspx" />
+    <Content Include="WebAdmin\ReportForm\ReportFav.aspx" />
     <Content Include="WebAdmin\SelectMember.aspx" />
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
@@ -430,6 +433,27 @@
     </Compile>
     <Compile Include="WebAdmin\Commodity\EditCommodity.aspx.designer.cs">
       <DependentUpon>EditCommodity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebAdmin\ReportForm\ReportAnalysis.aspx.cs">
+      <DependentUpon>ReportAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebAdmin\ReportForm\ReportAnalysis.aspx.designer.cs">
+      <DependentUpon>ReportAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebAdmin\ReportForm\ReportContent.aspx.cs">
+      <DependentUpon>ReportContent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebAdmin\ReportForm\ReportContent.aspx.designer.cs">
+      <DependentUpon>ReportContent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebAdmin\ReportForm\ReportFav.aspx.cs">
+      <DependentUpon>ReportFav.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebAdmin\ReportForm\ReportFav.aspx.designer.cs">
+      <DependentUpon>ReportFav.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebAdmin\SelectMember.aspx.cs">
       <DependentUpon>SelectMember.aspx</DependentUpon>

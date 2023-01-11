@@ -24,13 +24,13 @@
         <%Int32 intLevel = Int32.Parse((ht["TYPE_LEVEL"].ToString())); %>
         <%string msg = ht["TYPE_STATUS"].ToString(); %>
         <tr>
-            <td><%=ht["TYPE_ID"].ToString() %></td>
-            <td><%=(intLevel==1)?"大類":"小類" %></td>
-            <td><%=ht["TYPE_UPPER"].ToString() %></td>
-            <td><%=ht["TYPE_CODE"].ToString() %></td>
-            <td><%=(msg == "Y")?"正常":"刪除" %></td>
-            <td><%=ht["TYPE_NAME"].ToString() %></td>
-            <td><%=ht["TYPE_PS"].ToString() %></td>
+            <td><%=ht["TYPE_ID"].ToString() %>&nbsp;</td>
+            <td><%=(intLevel==1)?"大類":"小類" %>&nbsp;</td>
+            <td><%=ht["TYPE_UPPER"].ToString() %>&nbsp;</td>
+            <td><%=ht["TYPE_CODE"].ToString() %>&nbsp;</td>
+            <td><%=(msg == "Y")?"正常":"刪除" %>&nbsp;</td>
+            <td><%=ht["TYPE_NAME"].ToString() %>&nbsp;</td>
+            <td><%=ht["TYPE_PS"].ToString() %>&nbsp;</td>
             <td><a href="EditCategory.aspx?id=<%=ht["TYPE_ID"].ToString()%>">編輯&nbsp;</a></td>
             <td><a href="DeleteCategory.aspx?id=<%=ht["TYPE_ID"].ToString()%>">刪除</a></td>
         </tr>

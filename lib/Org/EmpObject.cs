@@ -53,7 +53,7 @@ namespace EIPTest.lib.Org
             Hashtable _hm = new Hashtable();
             Db = new DataBase();
             StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT SERIAL_ID, NATIONAL_ID, EMP_ID, EMP_NAME, EMP_PASSWORD, EMP_EMAIL, EMP_SEX, EMP_PHONE, EMP_PLACE FROM SJ0007_LOGIN ");
+            sb.Append("SELECT SERIAL_ID, NATIONAL_ID, EMP_ID, EMP_NAME, EMP_PASSWORD, EMP_EMAIL, EMP_SEX, EMP_PHONE, EMP_PLACE FROM SJ0007_LOGIN WHERE EMP_ID='" + empId + "'");
 
 
             ArrayList resultList = Db.QueryDB(sb.ToString());

@@ -24,15 +24,15 @@
         <%DateTime ct = DateTime.Parse(ht["CREATE_TIME"].ToString()); %>
         <tr>
             <td><img src="<%=ht["ITEM_PIC"].ToString()%>" width="50" /></td>
-            <td><%=ht["ITEM_TITLE"].ToString() %></td>
-            <td><%=ht["TYPE_NAME"].ToString() %></td>
+            <td><%=ht["ITEM_TITLE"].ToString() %>&nbsp;</td>
+            <td><%=ht["TYPE_NAME"].ToString() %>&nbsp;</td>
             <td><% if (msg == "Y")
                     {%><span>上架</span> <%}
                    else
                    {%><span>下架</span> <%}
-            %></td>
-            <td><%=ht["ITEM_PLACE"].ToString() %></td>
-            <td><%=ct.ToString("yyyy/MM/dd") %></td>
+            %>&nbsp;</td>
+            <td><%=ht["ITEM_PLACE"].ToString() %>&nbsp;</td>
+            <td><%=ct.ToString("yyyy/MM/dd") %>&nbsp;</td>
             <input id="members" type="hidden" name="member" value="<%=ht["ITEM_ID"].ToString() %>" />
             <td><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">刪除喜好清單</asp:LinkButton></td>
         </tr>
