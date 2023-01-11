@@ -23,7 +23,6 @@ namespace EIPTest.ProductBrowse
     {
         DataBase db = new DataBase();
         public ArrayList _arrayList = new ArrayList();
-        public bool Fao = false;
         protected void Page_Load(object sender, EventArgs e)
         {
 

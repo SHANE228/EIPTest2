@@ -38,10 +38,23 @@ namespace EIPTest.WebAdmin
         protected void Button1_Click(object sender, EventArgs e)
         {
             int rQuery = Int32.Parse(Request.QueryString["id"]);
-            StringBuilder sb1 = new StringBuilder();
-            sb1.Append("DELETE FROM ITEM_TYPE WHERE TYPE_ID=" + rQuery);
-            db.UpdateDB(sb1.ToString());
-            Response.Redirect("~/WebAdmin/Category/CommodityCategory.aspx");
+
+            StringBuilder sb2 = new StringBuilder();
+            sb2.Append("SELECT TYPE_ID FROM ITEM_DETAIL WHERE TYPE_ID=" + rQuery);
+            string test = db.GetOneColumnData(sb2.ToString());
+            if(test != "")
+            {
+                StringBuilder sb1 = new StringBuilder();
+                sb1.Append("DELETE FROM ITEM_TYPE WHERE TYPE_ID=" + rQuery);
+                db.UpdateDB(sb1.ToString());
+                Response.Redirect("~/WebAdmin/Category/CommodityCategory.aspx");
+            }
+            else
+            {
+                Response.Write("<Script language='JavaScript'>alert('此類別已被商品引用，無法刪除');</Script>");
+            }
+
+
         }
     }
 }
