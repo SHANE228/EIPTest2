@@ -38,6 +38,7 @@ namespace EIPTest.FavList
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
+            //前端hidden商品代號傳到後端辨識每個商品，且商品狀態修改成 'D'
             string reData = Request.Form["member"];
             StringBuilder sb2 = new StringBuilder();
             sb2.Append("UPDATE MEMBER_FAVORITE SET FAV_STATUS = 'D', MODIFY_TIME= SYSDATE, DELETE_TIME=SYSDATE WHERE ITEM_ID=" +reData);

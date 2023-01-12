@@ -192,3 +192,9 @@ D:\work\EIPTest\EIPTest\obj\Debug\EIPTest.csproj.CoreCompileInputs.cache
 D:\work\EIPTest\EIPTest\obj\Debug\EIPTest.csproj.CopyComplete
 D:\work\EIPTest\EIPTest\obj\Debug\EIPTest.dll
 D:\work\EIPTest\EIPTest\obj\Debug\EIPTest.pdb
+D:\work\EIPTest\EIPTest\bin\Microsoft.Extensions.Logging.Abstractions.dll
+D:\work\EIPTest\EIPTest\bin\Quartz.dll
+D:\work\EIPTest\EIPTest\bin\System.Diagnostics.DiagnosticSource.dll
+D:\work\EIPTest\EIPTest\bin\Microsoft.Extensions.Logging.Abstractions.xml
+D:\work\EIPTest\EIPTest\bin\Quartz.xml
+D:\work\EIPTest\EIPTest\bin\System.Diagnostics.DiagnosticSource.xml

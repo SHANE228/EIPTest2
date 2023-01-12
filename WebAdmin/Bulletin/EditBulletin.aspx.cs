@@ -44,12 +44,14 @@ namespace EIPTest.WebAdmin.Bulletin
                     StringBuilder sb3 = new StringBuilder();
                     sb3.Append("SELECT NOTICE_OPEN FROM NOTICE_DETAIL WHERE NOTICE_ID=" + rQuery);
                     string open = db.GetOneColumnData(sb3.ToString());
+                    //抓取時間修改成YYYY-MM-DD，方便儲存到TEXTMODE=DATE狀態
                     open = open.Insert(4, "-");
                     open = open.Insert(7, "-");
 
                     StringBuilder sb4 = new StringBuilder();
                     sb4.Append("SELECT NOTICE_CLOSE FROM NOTICE_DETAIL WHERE NOTICE_ID=" + rQuery);
                     string close = db.GetOneColumnData(sb4.ToString());
+                    //抓取時間修改成YYYY-MM-DD，方便儲存到TEXTMODE=DATE狀態
                     close = close.Insert(4, "-");
                     close = close.Insert(7, "-");
                     TextBox1.Text = topic;

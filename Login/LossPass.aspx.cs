@@ -49,6 +49,7 @@ namespace EIPTest.Login
             int intGCL = Int32.Parse(gocl);
             if (intGCL != 0)
             {
+                //資料庫撈取密碼並且解碼
                 StringBuilder sba = new StringBuilder();
                 sba.Append("SELECT EMP_PASSWORD FROM SJ0007_LOGIN WHERE EMP_ID= '" + TextBox1.Text + "'");
                 string _password = db.GetOneColumnData(sba.ToString());
@@ -61,6 +62,8 @@ namespace EIPTest.Login
                     msg.To.Add(new MailAddress(to));
                     msg.From = new MailAddress("shin-jan@outlook.com", "新展");
                     msg.Subject = "您的密碼";
+
+                    //解碼後的密碼寄送到使用者EMAIL
                     msg.Body = "您的密碼 :" + decryptText;
                     msg.IsBodyHtml = true;
 

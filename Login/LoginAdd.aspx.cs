@@ -45,7 +45,7 @@ namespace EIPTest.Login
             string serial_ID = db.GetSequence("SJ0007_SERIAL");
             string result = System.Text.RegularExpressions.Regex.Replace(EMP_Birthday.Text, "[-]", "");
 
-
+            //檢核身分證或帳號是否重複
             if (intGCL != 0 && _base64NID == passNID)
             {
                 Label1.Text = "帳號與身分證重複";
@@ -60,6 +60,7 @@ namespace EIPTest.Login
             }
             else
             {
+                //不重複執行以下程式碼
                 string msg = "";
                 if (RadioButton1.Checked)
                 {
@@ -67,6 +68,9 @@ namespace EIPTest.Login
                     if (msg == "男")
                     {
                         int intMsg = 1;
+
+                        //身分證與密碼加密回傳到資料庫
+                        
                         string base64String = MyAesCryptography.Encrypt(myKey, myIV, EMP_Password.Text);
                         string base64NID = MyAesCryptography.Encrypt(myKey, myIV, National_ID.Text);
                         StringBuilder sb = new StringBuilder();
@@ -84,6 +88,7 @@ namespace EIPTest.Login
                     if (msg == "女")
                     {
                         int intMsg = 2;
+                        //身分證與密碼加密回傳到資料庫
                         string base64String = MyAesCryptography.Encrypt(myKey, myIV, EMP_Password.Text);
                         string base64NID = MyAesCryptography.Encrypt(myKey, myIV, National_ID.Text);
                         StringBuilder sb = new StringBuilder();

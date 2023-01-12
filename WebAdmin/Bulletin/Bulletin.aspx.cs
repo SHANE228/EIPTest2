@@ -30,6 +30,7 @@ namespace EIPTest.WebAdmin.Bulletin
             {
                 Response.Redirect("~/WebAdmin/AdminDefault.aspx");
             }
+            //排除公告狀態為刪除'D'
             StringBuilder sb = new StringBuilder();
             sb.Append("SELECT NOTICE_ID, NOTICE_TOPIC, NOTICE_CONTENT, NOTICE_OPEN, NOTICE_CLOSE, NOTICE_STATUS, CREATE_TIME, MODIFY_TIME FROM NOTICE_DETAIL WHERE NOT NOTICE_STATUS ='D'");
             _arrayList = db.QueryDB(sb.ToString());

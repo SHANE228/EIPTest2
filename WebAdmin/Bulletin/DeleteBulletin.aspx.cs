@@ -38,6 +38,7 @@ namespace EIPTest.WebAdmin.Bulletin
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            //不執行DELETE SQL指令，UPDATE公告狀態改成'D'代表刪除
             StringBuilder sb1 = new StringBuilder();
             int rQuery = Int32.Parse(Request.QueryString["id"]);
             sb1.Append("UPDATE NOTICE_DETAIL SET NOTICE_STATUS= 'D', DELETE_TIME = SYSDATE WHERE NOTICE_ID=" + rQuery);

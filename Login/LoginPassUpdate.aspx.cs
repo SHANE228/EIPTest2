@@ -50,7 +50,7 @@ namespace EIPTest.Login
             string passNID = db.GetOneColumnData(sba.ToString());
             string ase64NID = MyAesCryptography.Decrypt(myKey, myIV, passNID);
 
-
+            //比對TEXTBOX1,2密碼
             if (base64NID == base64NID2)
             {
                 if (pass1 == ase64NID)
@@ -59,7 +59,7 @@ namespace EIPTest.Login
                 }
                 else
                 {
-                    //修改密碼
+                    //比對密碼不相同，修改密碼
                     sb.Append("UPDATE SJ0007_LOGIN SET EMP_PASSWORD ='" + base64NID + "'WHERE EMP_ID='" + empBasic.empId + "'");
                     db.UpdateDB(sb.ToString());
                     Response.Write("<Script language='JavaScript'>alert('已成功完成密碼修改');</Script>");
