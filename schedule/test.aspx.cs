@@ -19,21 +19,21 @@ using EIPTest.lib.Org;
 using Quartz;
 using System.Threading;
 
+
 namespace EIPTest
 {
-    public class CreateProduct :IJob
+    public partial class test : System.Web.UI.Page
     {
         DataBase db = new DataBase();
-        public bool _stopping = false;
         public string ftpPath = "ITEM" + DateTime.Now.ToString("yyyyMMdd");
         public string msg = "";
-        public void SendProduct()
+        protected void Page_Load(object sender, EventArgs e)
         {
             string strDt = DateTime.Today.ToString("yyyy-MM-dd");
             StringBuilder sb = new StringBuilder();
             ArrayList _arrayList = new ArrayList();
             //SELECT TYPE_NAME FROM ITEM_TYPE WHERE TYPE_ID=(SELECT TYPE_UPPER FROM ITEM_TYPE WHERE TYPE_ID = 2)
-            sb.Append("SELECT A.ITEM_OPEN, A.ITEM_ID, B.TYPE_NAME, A.ITEM_TITLE, A.ITEM_COUNT, A.ITEM_PRICE, ITEM_PLACE FROM ITEM_DETAIL A, ITEM_TYPE B WHERE TRUNC (A.CREATE_TIME) = TO_DATE('" + strDt + "' ,'yyyy-MM-DD') AND A.TYPE_ID = B.TYPE_ID ");
+            sb.Append("SELECT A.ITEM_OPEN, A.ITEM_ID, B.TYPE_NAME, A.ITEM_TITLE, A.ITEM_COUNT, A.ITEM_PRICE, ITEM_PLACE FROM ITEM_DETAIL A, ITEM_TYPE B WHERE TRUNC (A.CREATE_TIME) = TO_DATE("+strDt +" ,'yyyy-MM-DD') AND A.TYPE_ID = B.TYPE_ID ");
             _arrayList = db.QueryDB(sb.ToString());
             if (_arrayList.Count >= 0)
             {
@@ -41,6 +41,7 @@ namespace EIPTest
                 {
                     string str = ht["ITEM_OPEN"].ToString();
                     DateTime open = DateTime.ParseExact(str, "yyyyMMdd", null);
+
                     string strOpen = open.ToString("yyyyMMdd");
                     string itemID = ht["ITEM_ID"].ToString();
                     string name = ht["TYPE_NAME"].ToString();
@@ -48,18 +49,13 @@ namespace EIPTest
                     string count = ht["ITEM_COUNT"].ToString();
                     string price = ht["ITEM_PRICE"].ToString();
                     string place = ht["ITEM_PLACE"].ToString();
-                    msg += strOpen + "," + itemID + "," + name + "," + title + "," + count + "," + price + "," + place + "\r\n";
+                    msg += strOpen + "," + itemID + "," + name + "," + title + "," + count + "," + price + "," + place + "," + "\r\n";
                 }
             }
             Append_String_To_File(msg);
             Ftp_Stream_Function();
-            Thread.Sleep(2000);
         }
-        public Task Execute(IJobExecutionContext context)
-        {
-            SendProduct();
-            throw new NotImplementedException();
-        }
+
         public void Append_String_To_File(string writeValue)
         {
             string path_Result_out = "C:\\ftpTest\\" + ftpPath + ".txt";
@@ -82,7 +78,6 @@ namespace EIPTest
 
             }
         }
-
         public void Ftp_Stream_Function()
         {
 
@@ -110,7 +105,6 @@ namespace EIPTest
             //Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
 
             response.Close();
-
         }
     }
 }
