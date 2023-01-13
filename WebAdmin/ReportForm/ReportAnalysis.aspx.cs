@@ -31,7 +31,7 @@ namespace EIPTest.WebAdmin.ReportForm
             }
             //商品TOP3
             StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT * FROM(SELECT ITEM_VIEW_COUNT, LISTAGG (ITEM_TITLE, ',') WITHIN GROUP(ORDER BY ITEM_TITLE) ITEM_TITLE FROM ITEM_DETAIL GROUP BY ITEM_VIEW_COUNT order by ITEM_VIEW_COUNT DESC) where ROWNUM<= 3");
+            sb.Append("SELECT * FROM(SELECT ITEM_VIEW_COUNT, LISTAGG (ITEM_TITLE, ',') WITHIN GROUP(ORDER BY ITEM_TITLE) ITEM_TITLE FROM ITEM_DETAIL GROUP BY ITEM_VIEW_COUNT ORDER BY ITEM_VIEW_COUNT DESC) WHERE ROWNUM<= 3");
             _arrayList = db.QueryDB(sb.ToString());
 
             //近30天

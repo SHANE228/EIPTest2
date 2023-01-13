@@ -169,6 +169,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="NoticeContent.aspx" />
     <Content Include="PIC\ac.jpg" />
     <Content Include="ProductBrowse\ProductBrowse.aspx" />
     <Content Include="ProductBrowse\ProductContent.aspx" />
@@ -236,7 +237,6 @@
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
-    <Content Include="Site.Mobile.Master" />
     <Content Include="WebAdmin\Admin.Master" />
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +313,13 @@
     <Compile Include="Login\LossPass.aspx.designer.cs">
       <DependentUpon>LossPass.aspx</DependentUpon>
     </Compile>
+    <Compile Include="NoticeContent.aspx.cs">
+      <DependentUpon>NoticeContent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NoticeContent.aspx.designer.cs">
+      <DependentUpon>NoticeContent.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProductBrowse\ProductBrowse.aspx.cs">
       <DependentUpon>ProductBrowse.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -341,13 +348,6 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Site.Mobile.Master.cs">
-      <DependentUpon>Site.Mobile.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Mobile.Master.designer.cs">
-      <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="schedule\test.aspx.cs">
       <DependentUpon>test.aspx</DependentUpon>

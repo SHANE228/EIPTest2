@@ -16,6 +16,7 @@
             background-color: pink;
             float: left;
             display: inline-block;
+            margin-right:20px;
         }
 
         .menus {
@@ -23,8 +24,13 @@
             width: 170px;
             background-color: aliceblue;
             float: left;
+            margin-right:20px;
         }
-
+        .bodys{
+            height: 700px;
+            width: 800px;
+            float:left;
+        }
         .submit {
             text-align: center;
         }
@@ -102,7 +108,7 @@
 
         </div>
 
-        <div class="container body-content">
+        <div class="bodys">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>

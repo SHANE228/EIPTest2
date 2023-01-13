@@ -11,21 +11,21 @@
             <asp:ListItem></asp:ListItem>
             <asp:ListItem>ESkyMall</asp:ListItem>
             <asp:ListItem>EdaMall</asp:ListItem>
-        </asp:DropDownList><br />
+        </asp:DropDownList>
         商品名稱<asp:TextBox ID="TextBox1" runat="server" Width="78px"></asp:TextBox>
         <asp:Button ID="Button1" runat="server" Text="搜尋" OnClick="Button1_Click" /><br /> <br />
         <p>排序</p>
-        <asp:DropDownList ID="DropDownList4" runat="server">
+        <asp:DropDownList ID="DropDownList4" runat="server" >
             <asp:ListItem>金額</asp:ListItem>
             <asp:ListItem>大</asp:ListItem>
             <asp:ListItem>小</asp:ListItem>
         </asp:DropDownList>
-        <asp:DropDownList ID="DropDownList5" runat="server">
+        <asp:DropDownList ID="DropDownList5" runat="server" >
             <asp:ListItem>數量</asp:ListItem>
             <asp:ListItem>多</asp:ListItem>
             <asp:ListItem>少</asp:ListItem>
           </asp:DropDownList>
-        <asp:DropDownList ID="DropDownList6" runat="server">
+        <asp:DropDownList ID="DropDownList6" runat="server" >
             <asp:ListItem>地點</asp:ListItem>
             <asp:ListItem>ESkyMall</asp:ListItem>
             <asp:ListItem>EdaMall</asp:ListItem>

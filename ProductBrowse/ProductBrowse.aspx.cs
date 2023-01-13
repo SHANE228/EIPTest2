@@ -169,9 +169,7 @@ namespace EIPTest.ProductBrowse
                     sbc.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' ORDER BY ITEM_PRICE ASC ");
                     _arrayList = db.QueryDB(sbc.ToString());
                 }
-
-
-                if(DropDownList5.Text == "多")
+                if (DropDownList5.Text == "多")
                 {
                     sbc.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' ORDER BY ITEM_COUNT DESC ");
                     _arrayList = db.QueryDB(sbc.ToString());
@@ -181,9 +179,7 @@ namespace EIPTest.ProductBrowse
                     sbc.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' ORDER BY ITEM_COUNT ASC ");
                     _arrayList = db.QueryDB(sbc.ToString());
                 }
-
-
-                if(DropDownList6.Text == "ESkyMall")
+                if (DropDownList6.Text == "ESkyMall")
                 {
                     sbc.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' ORDER BY ITEM_PLACE ASC ");
                     _arrayList = db.QueryDB(sbc.ToString());
@@ -193,12 +189,9 @@ namespace EIPTest.ProductBrowse
                     sbc.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' ORDER BY ITEM_PLACE DESC ");
                     _arrayList = db.QueryDB(sbc.ToString());
                 }
-
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Response.Write("<Script language='JavaScript'>alert('輸入錯誤');</Script>");
-
             }
         }
     }

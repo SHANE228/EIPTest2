@@ -12,6 +12,12 @@
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <style>
+        .top {
+            height: 50px;
+            width: 1000px;
+            background-color: red;
+        }
+
         .menu {
             height: 200px;
             width: 140px;
@@ -28,15 +34,23 @@
         }
 
         .ts {
-            height: 102px;
-            width: 140px;
-            background-color: gainsboro;
-            float: right;
-            display: inline-block;
-            margin-left: 1000px;
+            height: 100px;
+            width: 741px;
+            float: left;
+            margin-top: 20px;
         }
 
         .bodys {
+            height: 800px;
+            width: 800px;
+            float: left;
+            margin-top: 20px;
+        }
+
+        .sub {
+            text-align: center;
+            font-size:22px;
+            margin-top:20px;
         }
 
         .submit {
@@ -45,6 +59,12 @@
 
         .p {
             line-height: 10px
+        }
+
+        .tb {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -69,6 +89,7 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
+
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -78,11 +99,13 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div>
-                <a class="navbar-brand" runat="server">商品促銷資訊平台</a>
+                &nbsp;
             </div>
             <div class="navbar-collapse collapse">
             </div>
+            <a class="navbar-brand" runat="server">商品促銷資訊平台</a>
         </div>
+
         <div class="menu">
             <div class="submit">
                 <asp:Label ID="Label1" runat="server" Text="Login"></asp:Label>
@@ -117,8 +140,79 @@
 
         </div>
         <div class="ts">
+            <table class="tb" border="1">
+                <tr>
+                    <td>
+                        <%  ArrayList _arrayList = new ArrayList();
+                            StringBuilder sb = new StringBuilder();
+                            sb.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE  NOTICE_ID =(SELECT MAX(NOTICE_ID) FROM NOTICE_DETAIL )");
+                            _arrayList = db.QueryDB(sb.ToString());
+
+                            if (_arrayList.Count > 0)
+                            {
+                                foreach (Hashtable ht in _arrayList)
+                                {%>
+                        <%string str = ht["NOTICE_OPEN"].ToString();
+                            DateTime open = DateTime.ParseExact(str, "yyyyMMdd", null);  %>
+                        <a href="NoticeContent.aspx?id=<%=ht["NOTICE_ID"].ToString()%>"><%= ht["NOTICE_TOPIC"].ToString() %></a><br />
+                        <span>公告日期: <%=open.ToString("yyyy-MM-dd") %></span>
+
+
+                        <%
+                                }
+                            } %>
+                    </td>
+                    <td>
+                        <%  ArrayList _arrayList1 = new ArrayList();
+                            StringBuilder sba = new StringBuilder();
+                            sba.Append("SELECT MAX(NOTICE_ID) FROM NOTICE_DETAIL WHERE NOTICE_ID < (SELECT MAX(NOTICE_ID) FROM NOTICE_DETAIL)");
+                            string msg = db.GetOneColumnData(sba.ToString());
+                            StringBuilder sb1 = new StringBuilder();
+                            sb1.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE  NOTICE_ID =" + msg);
+                            _arrayList1 = db.QueryDB(sb1.ToString());
+
+                            if (_arrayList1.Count > 0)
+                            {
+                                foreach (Hashtable hts in _arrayList1)
+                                {%>
+                        <%string str = hts["NOTICE_OPEN"].ToString();
+                            DateTime open = DateTime.ParseExact(str, "yyyyMMdd", null);  %>
+                        <a href="NoticeContent.aspx?id=<%=hts["NOTICE_ID"].ToString()%>"><%= hts["NOTICE_TOPIC"].ToString() %></a><br />
+                        <span>公告日期: <%=open.ToString("yyyy-MM-dd") %></span>
+
+
+                        <%
+                                }
+                            } %>
+
+                    </td>
+                    <td>
+                        <%  ArrayList _arrayList2 = new ArrayList();
+                            StringBuilder sbb = new StringBuilder();
+                            sbb.Append("SELECT NOTICE_ID FROM ( SELECT NOTICE_ID, RANK() OVER ( ORDER BY NOTICE_ID DESC) rnk FROM NOTICE_DETAIL ) WHERE rnk = 3");
+                            string msg1 = db.GetOneColumnData(sbb.ToString());
+                            StringBuilder sb2 = new StringBuilder();
+                            sb2.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE  NOTICE_ID =" + msg1);
+                            _arrayList2 = db.QueryDB(sb2.ToString());
+
+                            if (_arrayList2.Count > 0)
+                            {
+                                foreach (Hashtable htt in _arrayList2)
+                                {%>
+                        <%string str = htt["NOTICE_OPEN"].ToString();
+                            DateTime open = DateTime.ParseExact(str, "yyyyMMdd", null);  %>
+                        <a href="NoticeContent.aspx?id=<%=htt["NOTICE_ID"].ToString()%>"><%= htt["NOTICE_TOPIC"].ToString() %></a><br />
+                        <span>公告日期: <%=open.ToString("yyyy-MM-dd") %></span>
+
+                        <%
+                                }
+                            } %>
+
+                    </td>
+                </tr>
+            </table>
         </div>
-        <div class="container body-content">
+        <div class=" bodys<%--container body-content--%>">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </div>
