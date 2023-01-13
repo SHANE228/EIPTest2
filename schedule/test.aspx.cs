@@ -33,7 +33,7 @@ namespace EIPTest
             StringBuilder sb = new StringBuilder();
             ArrayList _arrayList = new ArrayList();
             //SELECT TYPE_NAME FROM ITEM_TYPE WHERE TYPE_ID=(SELECT TYPE_UPPER FROM ITEM_TYPE WHERE TYPE_ID = 2)
-            sb.Append("SELECT A.ITEM_OPEN, A.ITEM_ID, B.TYPE_NAME, A.ITEM_TITLE, A.ITEM_COUNT, A.ITEM_PRICE, ITEM_PLACE FROM ITEM_DETAIL A, ITEM_TYPE B WHERE TRUNC (A.CREATE_TIME) = TO_DATE("+strDt +" ,'yyyy-MM-DD') AND A.TYPE_ID = B.TYPE_ID ");
+            sb.Append("SELECT A.ITEM_OPEN, A.ITEM_ID, A.TYPE_ID, B.TYPE_NAME, A.ITEM_TITLE, A.ITEM_COUNT, A.ITEM_PRICE, ITEM_PLACE FROM ITEM_DETAIL A, ITEM_TYPE B WHERE TRUNC (A.CREATE_TIME) = TO_DATE('"+strDt +"' ,'yyyy-MM-DD') AND A.TYPE_ID = B.TYPE_ID ");
             _arrayList = db.QueryDB(sb.ToString());
             if (_arrayList.Count >= 0)
             {
@@ -42,6 +42,10 @@ namespace EIPTest
                     string str = ht["ITEM_OPEN"].ToString();
                     DateTime open = DateTime.ParseExact(str, "yyyyMMdd", null);
 
+                    StringBuilder sb1 = new StringBuilder();
+                    sb1.Append("SELECT TYPE_NAME FROM ITEM_TYPE WHERE TYPE_ID = (SELECT TYPE_UPPER FROM ITEM_TYPE WHERE TYPE_ID= " + ht["TYPE_ID"].ToString() + ")");
+                    string bigName = db.GetOneColumnData(sb1.ToString());
+
                     string strOpen = open.ToString("yyyyMMdd");
                     string itemID = ht["ITEM_ID"].ToString();
                     string name = ht["TYPE_NAME"].ToString();
@@ -49,7 +53,7 @@ namespace EIPTest
                     string count = ht["ITEM_COUNT"].ToString();
                     string price = ht["ITEM_PRICE"].ToString();
                     string place = ht["ITEM_PLACE"].ToString();
-                    msg += strOpen + "," + itemID + "," + name + "," + title + "," + count + "," + price + "," + place + "," + "\r\n";
+                    msg += strOpen + "," + itemID + "," + bigName + "," + name + "," + title + "," + count + "," + price + "," + place + "," + "\r\n";
                 }
             }
             Append_String_To_File(msg);
@@ -84,7 +88,7 @@ namespace EIPTest
             string path_Result_out = "C:\\ftpTest\\" + ftpPath + ".txt";
             string _Path_Result_out = ftpPath + ".txt";
             // Get the object used to communicate with the server.
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://192.168.4.137//" + _Path_Result_out);
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://192.168.56.1//" + _Path_Result_out);
             request.Method = WebRequestMethods.Ftp.UploadFile;
 
             // This example assumes the FTP site uses anonymous logon.

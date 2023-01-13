@@ -14,9 +14,9 @@
         </div>
     </form>
 </body>
-<script language="javascript">
+<%--<script language="javascript">
 window.opener=null;
 window.open("","_self");
 window.close();
-</script>
+</script>--%>
 </html>

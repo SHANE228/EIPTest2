@@ -32,7 +32,7 @@ namespace EIPTest.FavList
             EmpObject empBasic = new EmpObject(Session["empId"].ToString());
             //SELECT 商品管理內容，且排除刪除狀態
             StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT A.ITEM_ID, A.ITEM_PIC , A.ITEM_TITLE, A.TYPE_ID, B.TYPE_NAME, A.ITEM_STATUS, A.ITEM_PLACE,C.CREATE_TIME FROM ITEM_DETAIL A, ITEM_TYPE B, MEMBER_FAVORITE C WHERE A.TYPE_ID=B.TYPE_ID AND C.ITEM_ID=A.ITEM_ID AND C.FAV_STATUS='Y' AND C.WHO_MODIFY ='" +empBasic.empId + "'");
+            sb.Append("SELECT A.ITEM_ID, A.ITEM_PIC , A.ITEM_TITLE, A.TYPE_ID, B.TYPE_NAME, A.ITEM_STATUS, A.ITEM_PLACE,C.CREATE_TIME FROM ITEM_DETAIL A, ITEM_TYPE B, MEMBER_FAVORITE C WHERE A.TYPE_ID=B.TYPE_ID AND C.ITEM_ID=A.ITEM_ID AND C.FAV_STATUS='Y' AND C.WHO_MODIFY ='" +empBasic.empId + "' ORDER BY A.ITEM_ID ASC");
             _arrayList = db.QueryDB(sb.ToString());
         }
 

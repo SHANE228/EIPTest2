@@ -12,7 +12,8 @@
     <table>
         <tr>
             <th>商品代碼 &nbsp;</th>
-            <th>商品類別 &nbsp;</th>
+            <th>商品類別(大) &nbsp;</th>
+            <th>商品類別(小) &nbsp;</th>
             <th>上架日期 &nbsp;</th>
             <th>下架日期 &nbsp;</th>
             <th>瀏覽次數 &nbsp; </th>
@@ -34,8 +35,14 @@
              sb1.Append("SELECT COUNT(*) FROM MEMBER_FAVORITE WHERE ITEM_ID =" +ht["ITEM_ID"].ToString());
              string frequency = db.GetOneColumnData(sb1.ToString());
             %>
+        <%  
+            StringBuilder sb2 = new StringBuilder();
+            sb2.Append("SELECT TYPE_NAME FROM ITEM_TYPE WHERE TYPE_ID = (SELECT TYPE_UPPER FROM ITEM_TYPE WHERE TYPE_ID= " + ht["TYPE_ID"].ToString()+")");
+            string name = db.GetOneColumnData(sb2.ToString());
+            %>
         <tr>
             <td><%=ht["ITEM_ID"].ToString() %>&nbsp;</td>
+            <td><%=name %></td>
             <td><%=ht["TYPE_NAME"].ToString() %>&nbsp;</td>
             <td><%=open.ToString("yyyy/MM/dd")%>&nbsp;</td>
             <td><%=close.ToString("yyyy/MM/dd")%>&nbsp;</td>
@@ -56,7 +63,8 @@
     <table>
         <tr>
             <th>商品代碼 &nbsp;</th>
-            <th>商品類別 &nbsp;</th>
+            <th>商品類別(大) &nbsp;</th>
+            <th>商品類別(小) &nbsp;</th>
             <th>上架日期 &nbsp;</th>
             <th>下架日期 &nbsp;</th>
             <th>瀏覽次數 &nbsp; </th>
@@ -73,9 +81,14 @@
             DateTime close = DateTime.ParseExact(str1, "yyyyMMdd", null);  %>
         
          <% 
-             StringBuilder sb1 = new StringBuilder();
-             sb1.Append("SELECT COUNT(*) FROM MEMBER_FAVORITE WHERE ITEM_ID =" +ht1["ITEM_ID"].ToString());
-             string frequency = db.GetOneColumnData(sb1.ToString());
+             StringBuilder sb3 = new StringBuilder();
+             sb3.Append("SELECT COUNT(*) FROM MEMBER_FAVORITE WHERE ITEM_ID =" +ht1["ITEM_ID"].ToString());
+             string frequency = db.GetOneColumnData(sb3.ToString());
+            %>
+                <%  
+            StringBuilder sb4 = new StringBuilder();
+            sb4.Append("SELECT TYPE_NAME FROM ITEM_TYPE WHERE TYPE_ID = (SELECT TYPE_UPPER FROM ITEM_TYPE WHERE TYPE_ID= " + ht1["TYPE_ID"].ToString()+")");
+            string name = db.GetOneColumnData(sb4.ToString());
             %>
 
         <tr>

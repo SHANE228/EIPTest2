@@ -10,6 +10,7 @@
         <tr>
             <th>商品照片 &nbsp;</th>
             <th>商品標題 &nbsp;</th>
+            <th>商品分類(大) &nbsp;</th>
             <th>商品分類 &nbsp;</th>
             <th>商品數量 &nbsp;</th>
             <th>商品金額 &nbsp;</th>
@@ -26,16 +27,25 @@
             DateTime open = DateTime.ParseExact(str, "yyyyMMdd", null);  %>
         <%string str1 = ht["ITEM_CLOSE"].ToString();
             DateTime close = DateTime.ParseExact(str1, "yyyyMMdd", null);  %>
+
+        <%
+            StringBuilder sb1 = new StringBuilder();
+            sb1.Append("SELECT TYPE_NAME FROM ITEM_TYPE WHERE TYPE_ID = (SELECT TYPE_UPPER FROM ITEM_TYPE WHERE TYPE_ID= " + ht["TYPE_ID"].ToString() + ")");
+            string bigName = db.GetOneColumnData(sb1.ToString());
+        %>
         <tr>
-            <td><img src="<%=ht["ITEM_PIC"].ToString()%>" width="150" /></td>
+            <td>
+                <img src="<%=ht["ITEM_PIC"].ToString()%>" width="150" /></td>
             <td><%=ht["ITEM_TITLE"].ToString() %></td>
+            <td><%=bigName %></td>
             <td><%=ht["TYPE_NAME"].ToString() %></td>
             <td><%=ht["ITEM_COUNT"].ToString() %></td>
             <td><%=ht["ITEM_PRICE"].ToString() %></td>
             <td><%=open.ToString("yyyy/MM/dd")%>&nbsp;</td>
             <td><%=close.ToString("yyyy/MM/dd")%>&nbsp;</td>
             <td><%=ht["ITEM_DESCR"].ToString() %>&nbsp;</td>
-            <td><asp:Button ID="Button1" runat="server" Text="加入喜好清單" OnClick="Button1_Click" />
+            <td>
+                <asp:Button ID="Button1" runat="server" Text="加入喜好清單" OnClick="Button1_Click" />
                 <asp:Button ID="Button2" runat="server" Text="從喜好清單移除" OnClick="Button2_Click" />
             </td>
 

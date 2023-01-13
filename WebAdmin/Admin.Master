@@ -64,11 +64,10 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div>
-                <a class="navbar-brand" runat="server">後端管理介面:商品促銷資訊平台</a>
-            </div>
+                &nbsp;</div>
             <div class="navbar-collapse collapse">
             </div>
-        </div>
+                <a class="navbar-brand" runat="server">後端管理介面:商品促銷資訊平台</a></div>
         <div class="menu">
             <div class="submit">
                 <asp:Label ID="Label1" runat="server" Text="Login"></asp:Label>

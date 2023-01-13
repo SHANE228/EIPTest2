@@ -31,11 +31,11 @@ namespace EIPTest.WebAdmin.ReportForm
                 Response.Redirect("~/WebAdmin/AdminDefault.aspx");
             }
             StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT A.ITEM_ID, B.TYPE_NAME, A.ITEM_OPEN, A.ITEM_CLOSE, A.ITEM_VIEW_COUNT FROM ITEM_DETAIL A, ITEM_TYPE B  WHERE A.TYPE_ID = B.TYPE_ID AND NOT A.ITEM_STATUS ='D'");
+            sb.Append("SELECT A.ITEM_ID, A.TYPE_ID, B.TYPE_NAME, A.ITEM_OPEN, A.ITEM_CLOSE, A.ITEM_VIEW_COUNT FROM ITEM_DETAIL A, ITEM_TYPE B  WHERE A.TYPE_ID = B.TYPE_ID AND NOT A.ITEM_STATUS ='D' ORDER BY A.ITEM_ID ASC");
             _arrayList = db.QueryDB(sb.ToString());
 
             StringBuilder sb1 = new StringBuilder();
-            sb1.Append("SELECT A.ITEM_ID, B.TYPE_NAME, A.ITEM_OPEN, A.ITEM_CLOSE, A.ITEM_VIEW_COUNT FROM ITEM_DETAIL A, ITEM_TYPE B  WHERE A.TYPE_ID = B.TYPE_ID AND A.ITEM_STATUS ='D'");
+            sb1.Append("SELECT A.ITEM_ID, A.TYPE_ID, B.TYPE_NAME, A.ITEM_OPEN, A.ITEM_CLOSE, A.ITEM_VIEW_COUNT FROM ITEM_DETAIL A, ITEM_TYPE B  WHERE A.TYPE_ID = B.TYPE_ID AND A.ITEM_STATUS ='D' ORDER BY A.ITEM_ID ASC");
             _arrayList1 = db.QueryDB(sb1.ToString());
         }
     }

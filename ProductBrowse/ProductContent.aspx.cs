@@ -21,7 +21,7 @@ namespace EIPTest.ProductBrowse
 {
     public partial class ProductContent : System.Web.UI.Page
     {
-        DataBase db = new DataBase();
+        public DataBase db = new DataBase();
         public ArrayList _arrayList = new ArrayList();
         protected void Page_Load(object sender, EventArgs e)
         {

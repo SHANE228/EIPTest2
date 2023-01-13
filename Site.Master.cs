@@ -21,7 +21,7 @@ namespace EIPTest
 {
     public partial class SiteMaster : MasterPage
     {
-        DataBase db = new DataBase();
+        public DataBase db = new DataBase();
         public static string myKey = "1234567812345678";
         public static string myIV = "1234567812345678";
         public ArrayList punchList;

@@ -1585,6 +1585,7 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+    margin-bottom: 0px;
 }
 @media (min-width: 768px) {
   .container {
@@ -4293,8 +4294,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-fixed-top,
 .navbar-fixed-bottom {
   position: fixed;
-  right: 0;
-  left: 0;
+  right: -11px;
+  left: -10px;
   z-index: 1030;
 }
 .navbar-fixed-top .navbar-collapse,
@@ -4314,7 +4315,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-fixed-top {
-  top: 0;
+  top: 4px;
   border-width: 0 0 1px;
 }
 .navbar-fixed-bottom {
@@ -4349,7 +4350,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-brand {
   float: left;
-  height: 50px;
+  height: 14px;
   padding: 15px 15px;
   font-size: 18px;
   line-height: 20px;
@@ -4667,9 +4668,11 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .navbar-inverse {
   background-color: #222;
   border-color: #080808;
+    height: 65px;
 }
 .navbar-inverse .navbar-brand {
   color: #9d9d9d;
+    width: 333px;
 }
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {

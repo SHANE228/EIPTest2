@@ -49,7 +49,7 @@ namespace EIPTest.ProductBrowse
             {
                 Response.Redirect("~/Default.aspx");
             }
-                StringBuilder sba = new StringBuilder();
+            StringBuilder sba = new StringBuilder();
             sba.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y'");
             _arrayList = db.QueryDB(sba.ToString());
 
@@ -151,6 +151,54 @@ namespace EIPTest.ProductBrowse
                 sb5.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' AND (ITEM_TITLE LIKE '%" + name + "%' AND ITEM_PLACE ='" + DropDownList3.Text + "' AND TYPE_ID=" + typeID + ")");
                 _arrayList = db.QueryDB(sb5.ToString());
                 Response.Write(sb5.ToString());
+            }
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            StringBuilder sbc = new StringBuilder();
+            try
+            {
+                if (DropDownList4.Text == "大")
+                {
+                    sbc.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' ORDER BY ITEM_PRICE DESC ");
+                    _arrayList = db.QueryDB(sbc.ToString());
+                }
+                if (DropDownList4.Text == "小")
+                {
+                    sbc.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' ORDER BY ITEM_PRICE ASC ");
+                    _arrayList = db.QueryDB(sbc.ToString());
+                }
+
+
+                if(DropDownList5.Text == "多")
+                {
+                    sbc.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' ORDER BY ITEM_COUNT DESC ");
+                    _arrayList = db.QueryDB(sbc.ToString());
+                }
+                if (DropDownList5.Text == "少")
+                {
+                    sbc.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' ORDER BY ITEM_COUNT ASC ");
+                    _arrayList = db.QueryDB(sbc.ToString());
+                }
+
+
+                if(DropDownList6.Text == "ESkyMall")
+                {
+                    sbc.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' ORDER BY ITEM_PLACE ASC ");
+                    _arrayList = db.QueryDB(sbc.ToString());
+                }
+                else if (DropDownList6.Text == "EdaMall")
+                {
+                    sbc.Append("SELECT ITEM_ID, ITEM_PIC, ITEM_TITLE FROM ITEM_DETAIL WHERE ITEM_STATUS ='Y' ORDER BY ITEM_PLACE DESC ");
+                    _arrayList = db.QueryDB(sbc.ToString());
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<Script language='JavaScript'>alert('輸入錯誤');</Script>");
+
             }
         }
     }

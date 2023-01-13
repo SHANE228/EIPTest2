@@ -7,21 +7,22 @@
         if (_arrayList.Count > 0)
         {
     %>
-    <table>
-        <tr>
-            <th>商品名稱 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            <th>瀏覽次數 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-        </tr>
-        <%
-            foreach (Hashtable ht in _arrayList)
-            {
-        %>
-        <tr>
-            <td><%=ht["ITEM_TITLE"].ToString() %>&nbsp;</td>
-            <td><%=ht["ITEM_VIEW_COUNT"].ToString() %>&nbsp;</td>
-        </tr>
-        <%}%>
-    </table>
+    <span>名稱&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span>瀏覽數&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span>名稱&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span>瀏覽數&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span>名稱&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span>瀏覽數&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+    <%
+        foreach (Hashtable ht in _arrayList)
+        {
+    %>
+
+    <span><%=ht["ITEM_TITLE"].ToString() %>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span><%=ht["ITEM_VIEW_COUNT"].ToString() %>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+    <%}%>
+
     <%}%>
 
     <h3>30天內每日新增會員數</h3>
