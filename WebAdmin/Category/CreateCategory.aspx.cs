@@ -35,6 +35,7 @@ namespace EIPTest.WebAdmin
         {
             StringBuilder sba = new StringBuilder();
             string serial_ID = db.GetSequence("SJ0007_CATEGORY");
+            //檢核類別代碼是否重複
             sba.Append("SELECT COUNT(*) FROM ITEM_TYPE WHERE TYPE_CODE = '" + CategoryCode.Text + "'");
             string gocl = db.GetOneColumnData(sba.ToString());
             int intGcl = Int32.Parse(gocl);
@@ -48,12 +49,19 @@ namespace EIPTest.WebAdmin
                 msg = DropDownList1.Text;
                 if (msg == "大類")
                 {
-                    int intMsg = 1;
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append("INSERT INTO ITEM_TYPE (TYPE_ID, TYPE_LEVEL, TYPE_UPPER, TYPE_CODE, TYPE_STATUS, TYPE_NAME, TYPE_PS, CREATE_TIME, WHO_CREATE, MODIFY_TIME, WHO_MODIFY)");
-                    sb.Append("VALUES(" + serial_ID+"," +intMsg+ ",'" + UpperCode.Text + "','" + CategoryCode.Text + "', 'Y' ,'" + CategoryName.Text + "','"+ CategoryCaption.Text+ "', SYSDATE, 'SYS_ADMIN', SYSDATE,'SYS_ADMIN')");
-                    db.UpdateDB(sb.ToString());
-                    //Response.Write(sb.ToString());
+                    if (UpperCode.Text != "")
+                    {
+                        Label1.Text = "大類上層代碼需為空值";
+                    }
+                    else
+                    {
+                        int intMsg = 1;
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append("INSERT INTO ITEM_TYPE (TYPE_ID, TYPE_LEVEL, TYPE_CODE, TYPE_STATUS, TYPE_NAME, TYPE_PS, CREATE_TIME, WHO_CREATE, MODIFY_TIME, WHO_MODIFY)");
+                        sb.Append("VALUES(" + serial_ID + "," + intMsg + ",'" + CategoryCode.Text + "', 'Y' ,'" + CategoryName.Text + "','" + CategoryCaption.Text + "', SYSDATE, 'SYS_ADMIN', SYSDATE,'SYS_ADMIN')");
+                        db.UpdateDB(sb.ToString());
+                        Response.Redirect("~/WebAdmin/Category/CommodityCategory.aspx");
+                    }
                 }
                 if (msg == "小類")
                 {
@@ -62,9 +70,9 @@ namespace EIPTest.WebAdmin
                     sb.Append("INSERT INTO ITEM_TYPE (TYPE_ID, TYPE_LEVEL, TYPE_UPPER, TYPE_CODE, TYPE_STATUS, TYPE_NAME, TYPE_PS, CREATE_TIME, WHO_CREATE, MODIFY_TIME, WHO_MODIFY)");
                     sb.Append("VALUES(" + serial_ID + "," + intMsg + ",'" + UpperCode.Text + "','"+ CategoryCode.Text + "', 'Y' ,'" + CategoryName.Text + "','" + CategoryCaption.Text + "', SYSDATE, 'SYS_ADMIN', SYSDATE,'SYS_ADMIN')");
                     db.UpdateDB(sb.ToString());
-                    //Response.Write(sb.ToString());
+                    Response.Redirect("~/WebAdmin/Category/CommodityCategory.aspx");
                 }
-                Response.Redirect("~/WebAdmin/Category/CommodityCategory.aspx");
+                
             }
         }
     }

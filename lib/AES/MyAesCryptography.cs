@@ -29,9 +29,8 @@ namespace EIPTest.lib.AES
             }
         }
         /// <summary>
-        /// 加密後回傳base64String，相同明碼文字編碼後的base64String結果會相同(類似雜湊)，除非變更key或iv
-        /// 如果key和iv忘記遺失的話，資料就解密不回來
-        /// base64String若使用在Url的話，Web端記得做UrlEncode
+        /// 加密後回傳base64String
+        /// 相同明碼文字編碼後的base64String結果會相同，除非變更key或iv
         /// </summary>
         /// <param name="key"></param>
         /// <param name="iv"></param>
@@ -86,27 +85,28 @@ namespace EIPTest.lib.AES
             return Encoding.UTF8.GetString(outputData);
 
         }
-        //防止SQL injection 查詢輸入字串消除以下字囊
+        /// <summary>
+        /// 防止SQL injection,查詢輸入字串消除以下字囊
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static string ReplaceSQLChar(string str)
         {
             if (str == String.Empty)
                 return String.Empty;
             str = str.Replace("'", "");
             str = str.Replace(";", "");
+            str = str.Replace("--", "");
             str = str.Replace(",", "");
             str = str.Replace("?", "");
             str = str.Replace("<", "");
             str = str.Replace(">", "");
             str = str.Replace("(", "");
             str = str.Replace(")", "");
-            str = str.Replace("@", "");
+            str = str.Replace("1=1", "");
             str = str.Replace("=", "");
             str = str.Replace("+", "");
             str = str.Replace("*", "");
-            str = str.Replace("&", "");
-            str = str.Replace("#", "");
-            str = str.Replace("%", "");
-            str = str.Replace("$", "");
 
             //刪除與資料庫相關的字囊
             str = Regex.Replace(str, "select", "", RegexOptions.IgnoreCase);
@@ -118,24 +118,14 @@ namespace EIPTest.lib.AES
             str = Regex.Replace(str, "asc", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "mid", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "char", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "xp_cmdshell", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "exec master", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "net localgroup administrators", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "and", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "net user", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "or", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "net", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "-", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "delete", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "drop", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "script", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "update", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "and", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "chr", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "master", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "truncate", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "declare", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "mid", "", RegexOptions.IgnoreCase);
 
             return str;
         }

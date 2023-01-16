@@ -40,10 +40,13 @@ namespace EIPTest.WebAdmin
             int rQuery = Int32.Parse(Request.QueryString["id"]);
 
             StringBuilder sb2 = new StringBuilder();
+            //查詢商品基本檔案
             sb2.Append("SELECT TYPE_ID FROM ITEM_DETAIL WHERE TYPE_ID=" + rQuery);
             string test = db.GetOneColumnData(sb2.ToString());
-            if(test != "")
+            //類別代號是否被商品引用
+            if(test == "")
             {
+                //如果沒被商品影用可刪除
                 StringBuilder sb1 = new StringBuilder();
                 sb1.Append("DELETE FROM ITEM_TYPE WHERE TYPE_ID=" + rQuery);
                 db.UpdateDB(sb1.ToString());
@@ -51,6 +54,7 @@ namespace EIPTest.WebAdmin
             }
             else
             {
+                //如果被商品引用跳警告資訊
                 Response.Write("<Script language='JavaScript'>alert('此類別已被商品引用，無法刪除');</Script>");
             }
 

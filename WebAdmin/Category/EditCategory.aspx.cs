@@ -68,6 +68,7 @@ namespace EIPTest.WebAdmin
             sb5.Append("SELECT TYPE_ID FROM ITEM_TYPE WHERE TYPE_ID=" + rQuery);
             string id = db.GetOneColumnData(sb5.ToString());
 
+            //如果為大類
             if (id == "1")
             {
 
@@ -76,6 +77,7 @@ namespace EIPTest.WebAdmin
                 db.UpdateDB(sb.ToString());
                 Response.Redirect("~/WebAdmin/Category/CommodityCategory.aspx");
             }
+            //如果為小類
             else
             {
                 StringBuilder sb = new StringBuilder();

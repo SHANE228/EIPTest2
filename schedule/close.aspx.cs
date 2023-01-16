@@ -28,7 +28,7 @@ namespace EIPTest.schedule
         protected void Page_Load(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
-
+            //如果下架日期<=今日，且商品狀態非'刪除'，下架商品全數呼叫出來
             sb.Append("SELECT ITEM_ID FROM ITEM_DETAIL WHERE ITEM_CLOSE <= TO_NUMBER(TO_CHAR(SYSDATE,'yyyymmdd')) AND NOT ITEM_STATUS ='D'");
             _arrayList = db.QueryDB(sb.ToString());
             if (_arrayList.Count >= 0)
@@ -37,6 +37,7 @@ namespace EIPTest.schedule
                 {
                     string title = ht["ITEM_ID"].ToString();
                     StringBuilder sba = new StringBuilder();
+                    //架下商品改成'N'為下架
                     sba.Append("UPDATE ITEM_DETAIL SET ITEM_STATUS = 'N', MODIFY_TIME = SYSDATE WHERE ITEM_ID = " + title + "");
                     db.UpdateDB(sba.ToString());
                 }

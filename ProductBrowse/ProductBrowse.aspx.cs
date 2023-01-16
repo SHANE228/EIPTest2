@@ -157,6 +157,7 @@ namespace EIPTest.ProductBrowse
         protected void Button2_Click(object sender, EventArgs e)
         {
             StringBuilder sbc = new StringBuilder();
+            //排序
             try
             {
                 if (DropDownList4.Text == "大")
