@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <title>商品促銷資訊平台</title>
 
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
@@ -24,6 +24,7 @@
             background-color: gainsboro;
             float: left;
             display: inline-block;
+            margin-top: 20px;
         }
 
         .menus {
@@ -35,7 +36,7 @@
 
         .ts {
             height: 100px;
-            width: 741px;
+            width: 800px;
             float: left;
             margin-top: 20px;
         }
@@ -47,10 +48,11 @@
             margin-top: 20px;
         }
 
+
         .sub {
             text-align: center;
-            font-size:22px;
-            margin-top:20px;
+            font-size: 22px;
+            margin-top: 20px;
         }
 
         .submit {
@@ -121,7 +123,11 @@
                 <% }%>
             </div>
             <div class="submit">
+                <% if (Session["empId"] == null)
+                    {
+                %>
                 <asp:Button ID="btLogin" runat="server" Text="登入" OnClick="btLogin_Click" />
+                <% }%>
                 <asp:Button ID="btPassword" runat="server" Text="登出" OnClick="btPassword_Click" />
             </div>
 
@@ -143,15 +149,18 @@
             <table class="tb" border="1">
                 <tr>
                     <td>
-                        <%  ArrayList _arrayList = new ArrayList();
-                            StringBuilder sb = new StringBuilder();
-                            sb.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE  NOTICE_ID =(SELECT MAX(NOTICE_ID) FROM NOTICE_DETAIL )");
-                            _arrayList = db.QueryDB(sb.ToString());
-
-                            if (_arrayList.Count > 0)
+                        <%try
                             {
-                                foreach (Hashtable ht in _arrayList)
-                                {%>
+                                ArrayList _arrayList = new ArrayList();
+                                StringBuilder sb = new StringBuilder();
+                                //第一位
+                                sb.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE  NOTICE_ID =(SELECT MAX(NOTICE_ID) FROM NOTICE_DETAIL )");
+                                _arrayList = db.QueryDB(sb.ToString());
+
+                                if (_arrayList.Count > 0)
+                                {
+                                    foreach (Hashtable ht in _arrayList)
+                                    {%>
                         <%string str = ht["NOTICE_OPEN"].ToString();
                             DateTime open = DateTime.ParseExact(str, "yyyyMMdd", null);  %>
                         <a href="NoticeContent.aspx?id=<%=ht["NOTICE_ID"].ToString()%>"><%= ht["NOTICE_TOPIC"].ToString() %></a><br />
@@ -159,22 +168,32 @@
 
 
                         <%
+                                    }
                                 }
-                            } %>
+                            }
+                            catch (Exception ex)
+                            {%>
+                        <span>無公告</span>
+
+                        <% } %>
                     </td>
                     <td>
-                        <%  ArrayList _arrayList1 = new ArrayList();
-                            StringBuilder sba = new StringBuilder();
-                            sba.Append("SELECT MAX(NOTICE_ID) FROM NOTICE_DETAIL WHERE NOTICE_ID < (SELECT MAX(NOTICE_ID) FROM NOTICE_DETAIL)");
-                            string msg = db.GetOneColumnData(sba.ToString());
-                            StringBuilder sb1 = new StringBuilder();
-                            sb1.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE  NOTICE_ID =" + msg);
-                            _arrayList1 = db.QueryDB(sb1.ToString());
 
-                            if (_arrayList1.Count > 0)
+                        <%try
                             {
-                                foreach (Hashtable hts in _arrayList1)
-                                {%>
+                                ArrayList _arrayList1 = new ArrayList();
+                                StringBuilder sba = new StringBuilder();
+                                //第二位，MAX與子查詢MAX為第二
+                                sba.Append("SELECT MAX(NOTICE_ID) FROM NOTICE_DETAIL WHERE NOTICE_ID < (SELECT MAX(NOTICE_ID) FROM NOTICE_DETAIL)");
+                                string msg = db.GetOneColumnData(sba.ToString());
+                                StringBuilder sb1 = new StringBuilder();
+                                sb1.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE  NOTICE_ID =" + msg);
+                                _arrayList1 = db.QueryDB(sb1.ToString());
+
+                                if (_arrayList1.Count > 0)
+                                {
+                                    foreach (Hashtable hts in _arrayList1)
+                                    {%>
                         <%string str = hts["NOTICE_OPEN"].ToString();
                             DateTime open = DateTime.ParseExact(str, "yyyyMMdd", null);  %>
                         <a href="NoticeContent.aspx?id=<%=hts["NOTICE_ID"].ToString()%>"><%= hts["NOTICE_TOPIC"].ToString() %></a><br />
@@ -182,37 +201,49 @@
 
 
                         <%
+                                    }
                                 }
-                            } %>
-
+                            }
+                            catch (Exception ex)
+                            {%>
+                        <span>無公告</span>
+                        <% } %>
                     </td>
                     <td>
-                        <%  ArrayList _arrayList2 = new ArrayList();
-                            StringBuilder sbb = new StringBuilder();
-                            sbb.Append("SELECT NOTICE_ID FROM ( SELECT NOTICE_ID, RANK() OVER ( ORDER BY NOTICE_ID DESC) rnk FROM NOTICE_DETAIL ) WHERE rnk = 3");
-                            string msg1 = db.GetOneColumnData(sbb.ToString());
-                            StringBuilder sb2 = new StringBuilder();
-                            sb2.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE  NOTICE_ID =" + msg1);
-                            _arrayList2 = db.QueryDB(sb2.ToString());
-
-                            if (_arrayList2.Count > 0)
+                        <%try
                             {
-                                foreach (Hashtable htt in _arrayList2)
-                                {%>
+                                ArrayList _arrayList2 = new ArrayList();
+                                StringBuilder sbb = new StringBuilder();
+                                //指定第三位資料
+                                sbb.Append("SELECT NOTICE_ID FROM ( SELECT NOTICE_ID, RANK() OVER ( ORDER BY NOTICE_ID DESC) rnk FROM NOTICE_DETAIL ) WHERE rnk = 3");
+                                string msg1 = db.GetOneColumnData(sbb.ToString());
+                                StringBuilder sb2 = new StringBuilder();
+                                sb2.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE  NOTICE_ID =" + msg1);
+                                _arrayList2 = db.QueryDB(sb2.ToString());
+
+                                if (_arrayList2.Count > 0)
+                                {
+                                    foreach (Hashtable htt in _arrayList2)
+                                    {%>
                         <%string str = htt["NOTICE_OPEN"].ToString();
                             DateTime open = DateTime.ParseExact(str, "yyyyMMdd", null);  %>
                         <a href="NoticeContent.aspx?id=<%=htt["NOTICE_ID"].ToString()%>"><%= htt["NOTICE_TOPIC"].ToString() %></a><br />
                         <span>公告日期: <%=open.ToString("yyyy-MM-dd") %></span>
 
                         <%
+                                    }
                                 }
-                            } %>
 
+                            }
+                            catch (Exception ex)
+                            {%>
+                        <span>無公告</span>
+                        <%} %>
                     </td>
                 </tr>
             </table>
         </div>
-        <div class=" bodys<%--container body-content--%>">
+        <div class=" bodys">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </div>

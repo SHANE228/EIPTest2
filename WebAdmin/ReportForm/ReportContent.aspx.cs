@@ -29,10 +29,14 @@ namespace EIPTest.WebAdmin.ReportForm
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("~/WebAdmin/AdminDefault.aspx");
+            }
             int a1 = 0, b1 = 0, c1 = 0, d1 = 0, e1 = 0, f1 = 0, g1 = 0;
-            int rQuery = Int32.Parse(Request.QueryString["id"]);
+            int rQuery = Int32.Parse(MyAesCryptography.ReplaceSQLChar(Request.QueryString["id"]));
             StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT A.ITEM_ID, B.TYPE_NAME, A.ITEM_OPEN, A.ITEM_CLOSE, A.ITEM_VIEW_COUNT, C.FAV_STATUS FROM ITEM_DETAIL A, ITEM_TYPE B, MEMBER_FAVORITE C WHERE A.TYPE_ID = B.TYPE_ID AND A.ITEM_ID = C.ITEM_ID AND C.FAV_STATUS = 'Y'");
+            sb.Append("SELECT A.ITEM_ID, A.TYPE_ID, B.TYPE_NAME, A.ITEM_OPEN, A.ITEM_CLOSE, A.ITEM_VIEW_COUNT FROM ITEM_DETAIL A, ITEM_TYPE B  WHERE A.TYPE_ID = B.TYPE_ID AND A.ITEM_ID="+rQuery);
             _arrayList = db.QueryDB(sb.ToString());
 
             //被那些會員加入喜好清單統計

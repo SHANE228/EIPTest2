@@ -29,7 +29,7 @@ namespace EIPTest.WebAdmin
                 Response.Redirect("~/WebAdmin/AdminDefault.aspx");
             }
             StringBuilder sb = new StringBuilder();
-            int rQuery = Int32.Parse(Request.QueryString["id"]);
+            int rQuery = Int32.Parse(MyAesCryptography.ReplaceSQLChar(Request.QueryString["id"]));
             sb.Append("SELECT TYPE_ID, TYPE_LEVEL, TYPE_UPPER, TYPE_CODE, TYPE_STATUS, TYPE_NAME, TYPE_PS FROM ITEM_TYPE WHERE TYPE_ID=" + rQuery);
             _arrayList = db.QueryDB(sb.ToString());
 
@@ -37,7 +37,7 @@ namespace EIPTest.WebAdmin
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            int rQuery = Int32.Parse(Request.QueryString["id"]);
+            int rQuery = Int32.Parse(MyAesCryptography.ReplaceSQLChar(Request.QueryString["id"]));
 
             StringBuilder sb2 = new StringBuilder();
             //查詢商品基本檔案

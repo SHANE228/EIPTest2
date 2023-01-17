@@ -1,7 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FavList.aspx.cs" Inherits="EIPTest.FavList.FavList" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DeleteFavList.aspx.cs" Inherits="EIPTest.FavList.DeleteFavList" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>喜好清單</h1>
+        <h1>刪除喜好清單</h1>
     <%
         if (_arrayList.Count > 0)
         {
@@ -33,9 +32,9 @@
             %>&nbsp;</td>
             <td><%=ht["ITEM_PLACE"].ToString() %>&nbsp;</td>
             <td><%=ct.ToString("yyyy/MM/dd") %>&nbsp;</td>
-            <td><a href="DeleteFavList.aspx?id=<%=ht["ITEM_ID"].ToString()%>">刪除喜好清單</a></td>
         </tr>
         <%}%>
     </table>
-    <%} %>
+    <asp:Button ID="Button1" runat="server" Text="刪除喜好清單" OnClick="Button1_Click" />
+        <%} %>
 </asp:Content>

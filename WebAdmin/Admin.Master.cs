@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EIPTest.lib.AES;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,15 +20,17 @@ namespace EIPTest.WebAdmin
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            if(AdminLogin.Text=="SYS_ADMIN" && AdminPassword.Text=="ADMIN12345")
+            //抓取帳號
+            string replace1 = MyAesCryptography.ReplaceSQLChar(AdminLogin.Text);
+
+            //抓取密碼
+            string replace2 = MyAesCryptography.ReplaceSQLChar(AdminPassword.Text);
+            if (replace1=="SYS_ADMIN" && replace2=="ADMIN12345")
             {
                 Session["UserID"] = this.AdminLogin.Text;
                 Label1.Text = "歡迎~SYS_ADMIN";
                 Label2.Visible = false;
                 Label3.Visible = false;
-                AdminLogin.Visible = false;
-                AdminPassword.Visible = false;
-                btnLogin.Visible = false;
             }
             else
             {
@@ -41,9 +44,6 @@ namespace EIPTest.WebAdmin
             AdminPassword.Text = "";
             Label2.Visible = true;
             Label3.Visible = true;
-            AdminLogin.Visible = true;
-            AdminPassword.Visible = true;
-            btnLogin.Visible = true;
             Label1.Text = "Login";
             Session.Remove("UserID");
             Response.Redirect("~/WebAdmin/AdminDefault.aspx");

@@ -30,7 +30,7 @@ namespace EIPTest.ProductBrowse
             {
                 Response.Redirect("~/Default.aspx");
             }
-            int rQuery = Int32.Parse(Request.QueryString["id"]);
+            int rQuery = Int32.Parse(MyAesCryptography.ReplaceSQLChar(Request.QueryString["id"]));
             EmpObject empBasic = new EmpObject(Session["empId"].ToString());
             if (!IsPostBack)
             {
@@ -72,10 +72,10 @@ namespace EIPTest.ProductBrowse
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            int rQuery = Int32.Parse(Request.QueryString["id"]);
+            int rQuery = Int32.Parse(MyAesCryptography.ReplaceSQLChar(Request.QueryString["id"]));
             EmpObject empBasic = new EmpObject(Session["empId"].ToString());
             StringBuilder ssb = new StringBuilder();
-            ssb.Append("SELECT FAV_ID FROM MEMBER_FAVORITE WHERE FAV_ID=" + rQuery + "AND MEMBER_ID ="+empBasic.serial_Id);
+            ssb.Append("SELECT FAV_ID FROM MEMBER_FAVORITE WHERE ITEM_ID=" + rQuery + "AND MEMBER_ID ="+empBasic.serial_Id);
             string BData = db.GetOneColumnData(ssb.ToString());
             if (BData == "")
             {
@@ -100,7 +100,7 @@ namespace EIPTest.ProductBrowse
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            int rQuery = Int32.Parse(Request.QueryString["id"]);
+            int rQuery = Int32.Parse(MyAesCryptography.ReplaceSQLChar(Request.QueryString["id"]));
             StringBuilder sb2 = new StringBuilder();
             sb2.Append("UPDATE MEMBER_FAVORITE SET FAV_STATUS = 'D', MODIFY_TIME= SYSDATE, DELETE_TIME=SYSDATE WHERE ITEM_ID=" + rQuery);
             db.UpdateDB(sb2.ToString());

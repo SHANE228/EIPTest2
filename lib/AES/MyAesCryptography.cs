@@ -97,12 +97,7 @@ namespace EIPTest.lib.AES
             str = str.Replace("'", "");
             str = str.Replace(";", "");
             str = str.Replace("--", "");
-            str = str.Replace(",", "");
             str = str.Replace("?", "");
-            str = str.Replace("<", "");
-            str = str.Replace(">", "");
-            str = str.Replace("(", "");
-            str = str.Replace(")", "");
             str = str.Replace("1=1", "");
             str = str.Replace("=", "");
             str = str.Replace("+", "");
@@ -110,22 +105,17 @@ namespace EIPTest.lib.AES
 
             //刪除與資料庫相關的字囊
             str = Regex.Replace(str, "select", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "insert", "", RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, "insert into", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "delete from", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "count", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "drop table", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "truncate", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "asc", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "mid", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "char", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "and", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "or", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "-", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "delete", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "drop", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "script", "", RegexOptions.IgnoreCase);
             str = Regex.Replace(str, "update", "", RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, "and", "", RegexOptions.IgnoreCase);
 
             return str;
         }

@@ -84,10 +84,15 @@
                 %>
                 <asp:Label ID="Label2" runat="server" Text="帳號"></asp:Label><asp:TextBox ID="AdminLogin" runat="server" Width="105px"></asp:TextBox><br />
                 <asp:Label ID="Label3" runat="server" Text="密碼"></asp:Label><asp:TextBox ID="AdminPassword" TextMode="Password" runat="server" Width="105px"></asp:TextBox>
+                                
                 <% }%>
             </div>
             <div class="submit">
+               <% if (Session["UserID"] == null)
+                    {
+                %>
                 <asp:Button ID="btnLogin" runat="server" Text="登入" OnClick="btnLogin_Click" />
+                <% }%>
                 <asp:Button ID="btnPassword" runat="server" Text="登出" OnClick="btnPassword_Click" />
             </div>
 

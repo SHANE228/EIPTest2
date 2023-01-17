@@ -24,6 +24,7 @@ namespace EIPTest.WebAdmin.ReportForm
         public DataBase db = new DataBase();
         public ArrayList _arrayList = new ArrayList();
         public ArrayList _arrayList1 = new ArrayList();
+        public ArrayList _arrayList2 = new ArrayList();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserID"] == null)
@@ -31,8 +32,12 @@ namespace EIPTest.WebAdmin.ReportForm
                 Response.Redirect("~/WebAdmin/AdminDefault.aspx");
             }
             StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT A.ITEM_ID, A.TYPE_ID, B.TYPE_NAME, A.ITEM_OPEN, A.ITEM_CLOSE, A.ITEM_VIEW_COUNT FROM ITEM_DETAIL A, ITEM_TYPE B  WHERE A.TYPE_ID = B.TYPE_ID AND NOT A.ITEM_STATUS ='D' ORDER BY A.ITEM_ID ASC");
+            sb.Append("SELECT A.ITEM_ID, A.TYPE_ID, B.TYPE_NAME, A.ITEM_OPEN, A.ITEM_CLOSE, A.ITEM_VIEW_COUNT FROM ITEM_DETAIL A, ITEM_TYPE B  WHERE A.TYPE_ID = B.TYPE_ID AND A.ITEM_STATUS ='Y' ORDER BY A.ITEM_ID ASC");
             _arrayList = db.QueryDB(sb.ToString());
+
+            StringBuilder sb2 = new StringBuilder();
+            sb2.Append("SELECT A.ITEM_ID, A.TYPE_ID, B.TYPE_NAME, A.ITEM_OPEN, A.ITEM_CLOSE, A.ITEM_VIEW_COUNT FROM ITEM_DETAIL A, ITEM_TYPE B  WHERE A.TYPE_ID = B.TYPE_ID AND A.ITEM_STATUS ='N' ORDER BY A.ITEM_ID ASC");
+            _arrayList2 = db.QueryDB(sb2.ToString());
 
             StringBuilder sb1 = new StringBuilder();
             sb1.Append("SELECT A.ITEM_ID, A.TYPE_ID, B.TYPE_NAME, A.ITEM_OPEN, A.ITEM_CLOSE, A.ITEM_VIEW_COUNT FROM ITEM_DETAIL A, ITEM_TYPE B  WHERE A.TYPE_ID = B.TYPE_ID AND A.ITEM_STATUS ='D' ORDER BY A.ITEM_ID ASC");

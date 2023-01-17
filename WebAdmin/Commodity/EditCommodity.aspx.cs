@@ -32,7 +32,7 @@ namespace EIPTest.WebAdmin.Commodity
             if (!IsPostBack)
             {
                 StringBuilder sb1 = new StringBuilder();
-                int rQuery = Int32.Parse(Request.QueryString["id"]);
+                int rQuery = Int32.Parse(MyAesCryptography.ReplaceSQLChar(Request.QueryString["id"]));
 
 
                 StringBuilder sb2 = new StringBuilder();
@@ -114,7 +114,7 @@ namespace EIPTest.WebAdmin.Commodity
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            int rQuery = Int32.Parse(Request.QueryString["id"]);
+            int rQuery = Int32.Parse(MyAesCryptography.ReplaceSQLChar(Request.QueryString["id"]));
             string fileName = FileUpload1.FileName.ToLower();
             string savePath = Server.MapPath("~/PIC/");
             string pathName = savePath + fileName;

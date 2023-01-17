@@ -39,19 +39,19 @@ namespace EIPTest.Login
         {
             //抓取EMAIL
             StringBuilder ssb = new StringBuilder();
-            ssb.Append("SELECT EMP_EMAIL FROM SJ0007_LOGIN WHERE EMP_ID = '" + TextBox1.Text + "'");
+            ssb.Append("SELECT EMP_EMAIL FROM SJ0007_LOGIN WHERE EMP_ID = '" + (TextBox1.Text) + "'");
             string to = db.GetOneColumnData(ssb.ToString());
 
             //檢查帳號是否有該帳號
             StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT COUNT(*) FROM SJ0007_LOGIN WHERE EMP_ID = '" + TextBox1.Text + "'");
+            sb.Append("SELECT COUNT(*) FROM SJ0007_LOGIN WHERE EMP_ID = '" + MyAesCryptography.ReplaceSQLChar(TextBox1.Text) + "'");
             string gocl = db.GetOneColumnData(sb.ToString());
             int intGCL = Int32.Parse(gocl);
             if (intGCL != 0)
             {
                 //資料庫撈取密碼並且解碼
                 StringBuilder sba = new StringBuilder();
-                sba.Append("SELECT EMP_PASSWORD FROM SJ0007_LOGIN WHERE EMP_ID= '" + TextBox1.Text + "'");
+                sba.Append("SELECT EMP_PASSWORD FROM SJ0007_LOGIN WHERE EMP_ID= '" + MyAesCryptography.ReplaceSQLChar(TextBox1.Text) + "'");
                 string _password = db.GetOneColumnData(sba.ToString());
                 string decryptText = MyAesCryptography.Decrypt(myKey, myIV, _password);
 

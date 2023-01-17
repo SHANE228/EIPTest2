@@ -9,7 +9,8 @@
     <table>
         <tr>
             <th>商品代碼 &nbsp;</th>
-            <th>商品類別 &nbsp;</th>
+            <th>商品類別(大) &nbsp;</th>
+            <th>商品類別(小) &nbsp;</th>
             <th>上架日期 &nbsp;</th>
             <th>下架日期 &nbsp;</th>
             <th>瀏覽次數 &nbsp; </th>
@@ -24,10 +25,15 @@
             DateTime open = DateTime.ParseExact(str, "yyyyMMdd", null);  %>
         <%string str1 = ht["ITEM_CLOSE"].ToString();
             DateTime close = DateTime.ParseExact(str1, "yyyyMMdd", null);  %>
-        
+        <%  
+            StringBuilder sb2 = new StringBuilder();
+            sb2.Append("SELECT TYPE_NAME FROM ITEM_TYPE WHERE TYPE_ID = (SELECT TYPE_UPPER FROM ITEM_TYPE WHERE TYPE_ID= " + ht["TYPE_ID"].ToString()+")");
+            string name = db.GetOneColumnData(sb2.ToString());
+            %>
 
         <tr>
             <td><%=ht["ITEM_ID"].ToString() %>&nbsp;</td>
+            <td><%=name %></td>
             <td><%=ht["TYPE_NAME"].ToString() %>&nbsp;</td>
             <td><%=open.ToString("yyyy/MM/dd")%>&nbsp;</td>
             <td><%=close.ToString("yyyy/MM/dd")%>&nbsp;</td>
