@@ -28,7 +28,7 @@ namespace EIPTest
             try
             {
                 StringBuilder sb = new StringBuilder();
-                int rQuery = Int32.Parse(Request.QueryString["id"]);
+                int rQuery = Int32.Parse(MyAesCryptography.ReplaceSQLChar(Request.QueryString["id"]));
                 sb.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_CONTENT FROM NOTICE_DETAIL WHERE NOTICE_ID =" + rQuery);
                 _arrayList = db.QueryDB(sb.ToString());
             }

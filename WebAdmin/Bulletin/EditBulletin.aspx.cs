@@ -73,7 +73,7 @@ namespace EIPTest.WebAdmin.Bulletin
             string result2 = System.Text.RegularExpressions.Regex.Replace(TextBox4.Text, "[-]", "");
             int rQuery = Int32.Parse(MyAesCryptography.ReplaceSQLChar(Request.QueryString["id"]));
             StringBuilder sb = new StringBuilder();
-            sb.Append("UPDATE NOTICE_DETAIL SET NOTICE_TOPIC='"+TextBox1.Text+"', NOTICE_CONTENT='"+TextBox2.Text+"', NOTICE_OPEN="+result+",NOTICE_CLOSE="+result2+ ",MODIFY_TIME=SYSDATE WHERE NOTICE_ID=" + rQuery);
+            sb.Append("UPDATE NOTICE_DETAIL SET NOTICE_TOPIC='" + MyAesCryptography.ReplaceSQLChar(TextBox1.Text) + "', NOTICE_CONTENT='" + MyAesCryptography.ReplaceSQLChar(TextBox2.Text) + "', NOTICE_OPEN=" + result + ",NOTICE_CLOSE=" + result2 + ",MODIFY_TIME=SYSDATE WHERE NOTICE_ID=" + rQuery);
             db.UpdateDB(sb.ToString());
             Response.Redirect("~/WebAdmin/Bulletin/Bulletin.aspx");
         }

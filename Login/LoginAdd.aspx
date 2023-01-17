@@ -20,6 +20,10 @@
     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ControlToValidate="EMP_Password" runat="server" ErrorMessage="姓名必填"></asp:RequiredFieldValidator>
     <p>信箱</p>
     <asp:TextBox ID="EMP_Mail" runat="server" Width="249px"></asp:TextBox><br />
+    <!--正規表示法:
+            \w任意大小寫英文字母 0-9數字 下劃線 +為至少出現1個以上字符
+                [-+.]\w+ 任意包含 - + . 及 \w字符的組合出現0次或多次
+                    \. 固定符號 必須包括一個這個 -->
     <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="EMP_Mail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="信箱格式錯誤"></asp:RegularExpressionValidator><br />
     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ControlToValidate="EMP_Mail" runat="server" ErrorMessage="信箱必填"></asp:RequiredFieldValidator>
     <p>性別</p>

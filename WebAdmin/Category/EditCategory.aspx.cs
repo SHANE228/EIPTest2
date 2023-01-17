@@ -73,7 +73,7 @@ namespace EIPTest.WebAdmin
             {
 
                 StringBuilder sb = new StringBuilder();
-                sb.Append("UPDATE ITEM_TYPE SET TYPE_UPPER = NULL , TYPE_CODE ='" + TextBox2.Text + "', TYPE_NAME ='" + TextBox3.Text + "', TYPE_PS = '" + TextBox4.Text + "',MODIFY_TIME= SYSDATE WHERE TYPE_ID =" + rQuery);
+                sb.Append("UPDATE ITEM_TYPE SET TYPE_UPPER = NULL , TYPE_CODE ='" + MyAesCryptography.ReplaceSQLChar(TextBox2.Text) + "', TYPE_NAME ='" + MyAesCryptography.ReplaceSQLChar(TextBox3.Text) + "', TYPE_PS = '" + MyAesCryptography.ReplaceSQLChar(TextBox4.Text) + "',MODIFY_TIME= SYSDATE WHERE TYPE_ID =" + rQuery);
                 db.UpdateDB(sb.ToString());
                 Response.Redirect("~/WebAdmin/Category/CommodityCategory.aspx");
             }
@@ -81,7 +81,7 @@ namespace EIPTest.WebAdmin
             else
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append("UPDATE ITEM_TYPE SET TYPE_UPPER =" + TextBox1.Text + "," + "TYPE_CODE ='" + TextBox2.Text + "', TYPE_NAME ='" + TextBox3.Text + "', TYPE_PS = '" + TextBox4.Text + "',MODIFY_TIME= SYSDATE WHERE TYPE_ID =" + rQuery);
+                sb.Append("UPDATE ITEM_TYPE SET TYPE_UPPER =" + MyAesCryptography.ReplaceSQLChar(TextBox1.Text) + "," + "TYPE_CODE ='" + MyAesCryptography.ReplaceSQLChar(TextBox2.Text) + "', TYPE_NAME ='" + MyAesCryptography.ReplaceSQLChar(TextBox3.Text) + "', TYPE_PS = '" + MyAesCryptography.ReplaceSQLChar(TextBox4.Text) + "',MODIFY_TIME= SYSDATE WHERE TYPE_ID =" + rQuery);
                 db.UpdateDB(sb.ToString());
                 Response.Redirect("~/WebAdmin/Category/CommodityCategory.aspx");
             }

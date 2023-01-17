@@ -45,7 +45,7 @@ namespace EIPTest.Login
             string name = MyAesCryptography.ReplaceSQLChar(EMP_Name.Text);
             EmpObject empBasics = new EmpObject(Session["empId"].ToString());
             StringBuilder sb = new StringBuilder();
-            sb.Append("UPDATE SJ0007_LOGIN SET EMP_NAME ='" + name + "', EMP_EMAIL = '" + EMP_Mail.Text + "', EMP_PHONE = '" + EMP_Phone.Text + "', EMP_PLACE = '" + DropDownList1.Text + "', MODIFY_TIME = SYSDATE ");
+            sb.Append("UPDATE SJ0007_LOGIN SET EMP_NAME ='" + name + "', EMP_EMAIL = '" + MyAesCryptography.ReplaceSQLChar(EMP_Mail.Text) + "', EMP_PHONE = '" + MyAesCryptography.ReplaceSQLChar(EMP_Phone.Text) + "', EMP_PLACE = '" + DropDownList1.Text + "', MODIFY_TIME = SYSDATE ");
             sb.Append("WHERE EMP_ID = '" + empBasics.empId + "'");
             db.UpdateDB(sb.ToString());
             Response.Redirect("~/Login/LoginPass.aspx");

@@ -28,7 +28,7 @@ namespace EIPTest.WebAdmin
             if (replace1=="SYS_ADMIN" && replace2=="ADMIN12345")
             {
                 Session["UserID"] = this.AdminLogin.Text;
-                Label1.Text = "歡迎~SYS_ADMIN";
+                Label1.Text = "歡迎~"+"<br>" +"SYS_ADMIN";
                 Label2.Visible = false;
                 Label3.Visible = false;
             }

@@ -38,7 +38,7 @@ namespace EIPTest.WebAdmin.Bulletin
             string result = System.Text.RegularExpressions.Regex.Replace(NO_OPEN.Text, "[-]", "");
             string result2 = System.Text.RegularExpressions.Regex.Replace(NO_CLOSE.Text, "[-]", "");
             sb.Append("INSERT INTO NOTICE_DETAIL (NOTICE_ID, NOTICE_TOPIC, NOTICE_CONTENT, NOTICE_OPEN, NOTICE_CLOSE, NOTICE_STATUS, CREATE_TIME, WHO_CREATE, MODIFY_TIME, WHO_MODIFY)");
-            sb.Append("VALUES (" + serial_ID + ",'" + NO_TOPIC.Text + "','" + NO_CONTENT.Text + "'," + result + "," + result2 + ",'" + NO_STATUS.Text + "'," + "SYSDATE, 'SYS_ADMIN', SYSDATE,'SYS_ADMIN')");
+            sb.Append("VALUES (" + MyAesCryptography.ReplaceSQLChar(serial_ID) + ",'" + MyAesCryptography.ReplaceSQLChar(NO_TOPIC.Text) + "','" + MyAesCryptography.ReplaceSQLChar(NO_CONTENT.Text) + "'," + result + "," + result2 + ",'" + NO_STATUS.Text + "'," + "SYSDATE, 'SYS_ADMIN', SYSDATE,'SYS_ADMIN')");
             db.UpdateDB(sb.ToString());
             Response.Redirect("~/WebAdmin/Bulletin/Bulletin.aspx");
         }

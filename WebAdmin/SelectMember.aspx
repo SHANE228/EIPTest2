@@ -10,7 +10,7 @@
         姓名 :<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
         <asp:Button ID="Button1" runat="server" Text="查詢" OnClick="Button1_Click" />
         身分證字號 :<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-        <asp:Button ID="Button2" runat="server" Text="查詢" OnClick="Button2_Click" />
+        <asp:Button ID="Button2" runat="server" Text="查詢" OnClick="Button2_Click" /><br />
         <td>出生日期：</td>
         <span>
             <select name="year" id="year">

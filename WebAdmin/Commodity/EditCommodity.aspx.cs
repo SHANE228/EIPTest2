@@ -134,27 +134,27 @@ namespace EIPTest.WebAdmin.Commodity
 
             if (RadioButton1.Checked && CheckBox1.Checked)
             {
-                sb.Append("UPDATE ITEM_DETAIL SET TYPE_ID=" + typeId + ", ITEM_TITLE='" + ITEM_TITLE.Text + "', ITEM_PLACE='" + RadioButton1.Text + "',ITEM_PIC='" + TextBox1.Text + "',ITEM_DESCR='" + ITEM_DESCR.Text + "', ITEM_COUNT=" + ITEM_COUNT.Text + ", ITEM_PRICE=" + ITEM_PRICE.Text + ",ITEM_OPEN=" + result + ",ITEM_CLOSE=" + result2 + ", ITEM_STATUS='" + ITEM_STATUS.Text + "' WHERE ITEM_ID=" + rQuery);
+                sb.Append("UPDATE ITEM_DETAIL SET TYPE_ID=" + typeId + ", ITEM_TITLE='" + MyAesCryptography.ReplaceSQLChar(ITEM_TITLE.Text) + "', ITEM_PLACE='" + RadioButton1.Text + "',ITEM_PIC='" + TextBox1.Text + "',ITEM_DESCR='" + MyAesCryptography.ReplaceSQLChar(ITEM_DESCR.Text) + "', ITEM_COUNT=" + MyAesCryptography.ReplaceSQLChar(ITEM_COUNT.Text) + ", ITEM_PRICE=" + MyAesCryptography.ReplaceSQLChar(ITEM_PRICE.Text) + ",ITEM_OPEN=" + result + ",ITEM_CLOSE=" + result2 + ", ITEM_STATUS='" + ITEM_STATUS.Text + "' WHERE ITEM_ID=" + rQuery);
                 db.UpdateDB(sb.ToString());
                 //Response.Write(sb.ToString());
 
             }
             else if (RadioButton2.Checked && CheckBox1.Checked)
             {
-                sb.Append("UPDATE ITEM_DETAIL SET TYPE_ID=" + typeId + ", ITEM_TITLE='" + ITEM_TITLE.Text + "', ITEM_PLACE='" + RadioButton2.Text + "',ITEM_PIC='" + TextBox1.Text + "',ITEM_DESCR='" + ITEM_DESCR.Text + "', ITEM_COUNT=" + ITEM_COUNT.Text + ", ITEM_PRICE=" + ITEM_PRICE.Text + ",ITEM_OPEN=" + result + ",ITEM_CLOSE=" +result2 + ", ITEM_STATUS='" + ITEM_STATUS.Text + "' WHERE ITEM_ID=" + rQuery);
+                sb.Append("UPDATE ITEM_DETAIL SET TYPE_ID=" + typeId + ", ITEM_TITLE='" + MyAesCryptography.ReplaceSQLChar(ITEM_TITLE.Text) + "', ITEM_PLACE='" + RadioButton2.Text + "',ITEM_PIC='" + TextBox1.Text + "',ITEM_DESCR='" + MyAesCryptography.ReplaceSQLChar(ITEM_DESCR.Text) + "', ITEM_COUNT=" + MyAesCryptography.ReplaceSQLChar(ITEM_COUNT.Text) + ", ITEM_PRICE=" + MyAesCryptography.ReplaceSQLChar(ITEM_PRICE.Text) + ",ITEM_OPEN=" + result + ",ITEM_CLOSE=" +result2 + ", ITEM_STATUS='" + ITEM_STATUS.Text + "' WHERE ITEM_ID=" + rQuery);
                 db.UpdateDB(sb.ToString());
                 //Response.Write(sb.ToString());
 
             }
             else if (RadioButton1.Checked && CheckBox1 == null)
             {
-                sb.Append("UPDATE ITEM_DETAIL SET TYPE_ID=" + typeId + ", ITEM_TITLE='" + ITEM_TITLE.Text + "', ITEM_PLACE='" + RadioButton1.Text + "',ITEM_PIC='" + relPath + "',ITEM_DESCR='" + ITEM_DESCR.Text + "', ITEM_COUNT=" + ITEM_COUNT.Text + ", ITEM_PRICE=" + ITEM_PRICE.Text + ",ITEM_OPEN=" + result + ",ITEM_CLOSE=" + result2 + ", ITEM_STATUS='" + ITEM_STATUS.Text + "' WHERE ITEM_ID=" + rQuery);
+                sb.Append("UPDATE ITEM_DETAIL SET TYPE_ID=" + typeId + ", ITEM_TITLE='" + MyAesCryptography.ReplaceSQLChar(ITEM_TITLE.Text) + "', ITEM_PLACE='" + RadioButton1.Text + "',ITEM_PIC='" + relPath + "',ITEM_DESCR='" + MyAesCryptography.ReplaceSQLChar(ITEM_DESCR.Text) + "', ITEM_COUNT=" + MyAesCryptography.ReplaceSQLChar(ITEM_COUNT.Text) + ", ITEM_PRICE=" + MyAesCryptography.ReplaceSQLChar(ITEM_PRICE.Text) + ",ITEM_OPEN=" + result + ",ITEM_CLOSE=" + result2 + ", ITEM_STATUS='" + ITEM_STATUS.Text + "' WHERE ITEM_ID=" + rQuery);
                 db.UpdateDB(sb.ToString());
                 //Response.Write(sb.ToString());
             }
             else
             {
-                sb.Append("UPDATE ITEM_DETAIL SET TYPE_ID=" + typeId + ", ITEM_TITLE='" + ITEM_TITLE.Text + "', ITEM_PLACE='" + RadioButton2.Text + "',ITEM_PIC='" + relPath + "',ITEM_DESCR='" + ITEM_DESCR.Text + "', ITEM_COUNT=" + ITEM_COUNT.Text + ", ITEM_PRICE=" + ITEM_PRICE.Text + ",ITEM_OPEN=" + result + ",ITEM_CLOSE=" + result2 + ", ITEM_STATUS='" + ITEM_STATUS.Text + "' WHERE ITEM_ID=" + rQuery);
+                sb.Append("UPDATE ITEM_DETAIL SET TYPE_ID=" + typeId + ", ITEM_TITLE='" + MyAesCryptography.ReplaceSQLChar(ITEM_TITLE.Text) + "', ITEM_PLACE='" + RadioButton2.Text + "',ITEM_PIC='" + relPath + "',ITEM_DESCR='" + MyAesCryptography.ReplaceSQLChar(ITEM_DESCR.Text) + "', ITEM_COUNT=" + MyAesCryptography.ReplaceSQLChar(ITEM_COUNT.Text) + ", ITEM_PRICE=" + MyAesCryptography.ReplaceSQLChar(ITEM_PRICE.Text) + ",ITEM_OPEN=" + result + ",ITEM_CLOSE=" + result2 + ", ITEM_STATUS='" + ITEM_STATUS.Text + "' WHERE ITEM_ID=" + rQuery);
                 db.UpdateDB(sb.ToString());
                 //Response.Write(sb.ToString());
             }

@@ -77,7 +77,7 @@ namespace EIPTest.WebAdmin.Commodity
                 string result = System.Text.RegularExpressions.Regex.Replace(ITEM_OPEN.Text, "[-]", "");
                 string result2 = System.Text.RegularExpressions.Regex.Replace(ITEM_CLOSE.Text, "[-]", "");
                 sb.Append("INSERT INTO ITEM_DETAIL ( ITEM_ID, TYPE_ID, ITEM_TITLE, ITEM_PLACE, ITEM_PIC, ITEM_DESCR, ITEM_COUNT, ITEM_PRICE, ITEM_OPEN, ITEM_CLOSE, ITEM_STATUS, ITEM_VIEW_COUNT, CREATE_TIME, WHO_CREATE, MODIFY_TIME, WHO_MODIFY)");
-                sb.Append("VALUES (" + SID + "," + intTypeBig + ",'" + ITEM_NAME.Text + "','" +place +"','"+ relPath + "','"+ITEM_DESCR.Text+"',"+ITEM_COUNT.Text +","+ ITEM_PRICE.Text +"," +result +","+ result2+ ",'" +ITEM_STATUS.Text+ "', 0, SYSDATE, 'SYS_ADMIN', SYSDATE, 'SYS_ADMIN' " + ")");
+                sb.Append("VALUES (" + SID + "," + intTypeBig + ",'" + MyAesCryptography.ReplaceSQLChar(ITEM_NAME.Text) + "','" +place +"','"+ relPath + "','" + MyAesCryptography.ReplaceSQLChar(ITEM_DESCR.Text) +"'," + MyAesCryptography.ReplaceSQLChar(ITEM_COUNT.Text) +"," + MyAesCryptography.ReplaceSQLChar(ITEM_PRICE.Text) +"," +result +","+ result2+ ",'" +ITEM_STATUS.Text+ "', 0, SYSDATE, 'SYS_ADMIN', SYSDATE, 'SYS_ADMIN' " + ")");
                 db.UpdateDB(sb.ToString());
 
             }
@@ -87,7 +87,7 @@ namespace EIPTest.WebAdmin.Commodity
                 string result = System.Text.RegularExpressions.Regex.Replace(ITEM_OPEN.Text, "[-]", "");
                 string result2 = System.Text.RegularExpressions.Regex.Replace(ITEM_CLOSE.Text, "[-]", "");
                 sb.Append("INSERT INTO ITEM_DETAIL ( ITEM_ID, TYPE_ID, ITEM_TITLE, ITEM_PLACE, ITEM_PIC, ITEM_DESCR, ITEM_COUNT, ITEM_PRICE, ITEM_OPEN, ITEM_CLOSE, ITEM_STATUS, ITEM_VIEW_COUNT, CREATE_TIME, WHO_CREATE, MODIFY_TIME, WHO_MODIFY)");
-                sb.Append("VALUES (" + SID + "," + intTypeBig + ",'" + ITEM_NAME.Text + "','" + place + "','" + relPath + "','" + ITEM_DESCR.Text + "'," + ITEM_COUNT.Text + "," + ITEM_PRICE.Text + "," + result + "," + result2 + ",'" + ITEM_STATUS.Text + "', 0, SYSDATE, 'SYS_ADMIN', SYSDATE, 'SYS_ADMIN' " + ")");
+                sb.Append("VALUES (" + SID + "," + intTypeBig + ",'" + MyAesCryptography.ReplaceSQLChar(ITEM_NAME.Text) + "','" + place + "','" + relPath + "','" + MyAesCryptography.ReplaceSQLChar(ITEM_DESCR.Text) + "'," + MyAesCryptography.ReplaceSQLChar(ITEM_COUNT.Text) + "," + MyAesCryptography.ReplaceSQLChar(ITEM_PRICE.Text) + "," + result + "," + result2 + ",'" + ITEM_STATUS.Text + "', 0, SYSDATE, 'SYS_ADMIN', SYSDATE, 'SYS_ADMIN' " + ")");
                 db.UpdateDB(sb.ToString());
                 
             }
