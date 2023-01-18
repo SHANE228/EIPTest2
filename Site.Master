@@ -24,7 +24,7 @@
             background-color: gainsboro;
             float: left;
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 1px;
         }
 
         .menus {
@@ -43,7 +43,7 @@
 
         .bodys {
             height: 800px;
-            width: 800px;
+            width: 1000px;
             float: left;
             margin-top: 20px;
         }
@@ -154,7 +154,7 @@
                                 ArrayList _arrayList = new ArrayList();
                                 StringBuilder sb = new StringBuilder();
                                 //第一位
-                                sb.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE  NOTICE_ID =(SELECT MAX(NOTICE_ID) FROM NOTICE_DETAIL )");
+                                sb.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE  NOTICE_ID =(SELECT MAX(NOTICE_ID) FROM NOTICE_DETAIL ) AND NOTICE_STATUS = 'Y'");
                                 _arrayList = db.QueryDB(sb.ToString());
 
                                 if (_arrayList.Count > 0)
@@ -187,7 +187,7 @@
                                 sba.Append("SELECT MAX(NOTICE_ID) FROM NOTICE_DETAIL WHERE NOTICE_ID < (SELECT MAX(NOTICE_ID) FROM NOTICE_DETAIL)");
                                 string msg = db.GetOneColumnData(sba.ToString());
                                 StringBuilder sb1 = new StringBuilder();
-                                sb1.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE  NOTICE_ID =" + msg);
+                                sb1.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE NOTICE_STATUS='Y' AND NOTICE_ID =" + msg);
                                 _arrayList1 = db.QueryDB(sb1.ToString());
 
                                 if (_arrayList1.Count > 0)
@@ -218,7 +218,7 @@
                                 sbb.Append("SELECT NOTICE_ID FROM ( SELECT NOTICE_ID, RANK() OVER ( ORDER BY NOTICE_ID DESC) rnk FROM NOTICE_DETAIL ) WHERE rnk = 3");
                                 string msg1 = db.GetOneColumnData(sbb.ToString());
                                 StringBuilder sb2 = new StringBuilder();
-                                sb2.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE  NOTICE_ID =" + msg1);
+                                sb2.Append("SELECT NOTICE_TOPIC, NOTICE_OPEN, NOTICE_ID FROM NOTICE_DETAIL WHERE  NOTICE_STATUS='Y' AND   NOTICE_ID =" + msg1);
                                 _arrayList2 = db.QueryDB(sb2.ToString());
 
                                 if (_arrayList2.Count > 0)

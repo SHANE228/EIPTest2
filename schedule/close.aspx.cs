@@ -25,6 +25,7 @@ namespace EIPTest.schedule
     {
         DataBase db = new DataBase();
         public ArrayList _arrayList = new ArrayList();
+        public ArrayList _arrayList1 = new ArrayList();
         protected void Page_Load(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
@@ -40,6 +41,20 @@ namespace EIPTest.schedule
                     //架下商品改成'N'為下架
                     sba.Append("UPDATE ITEM_DETAIL SET ITEM_STATUS = 'N', MODIFY_TIME = SYSDATE WHERE ITEM_ID = " + title + "");
                     db.UpdateDB(sba.ToString());
+                }
+            }
+            StringBuilder sb1 = new StringBuilder();
+            //如果下架日期<=今日，下架公告全數呼叫出來
+            sb1.Append("SELECT NOTICE_ID FROM NOTICE_DETAIL WHERE NOTICE_CLOSE <= TO_NUMBER(TO_CHAR(SYSDATE,'yyyymmdd')) AND NOTICE_STATUS ='Y'");
+            _arrayList1 = db.QueryDB(sb1.ToString());
+            if (_arrayList1.Count >= 0)
+            {
+                foreach (Hashtable ht1 in _arrayList1)
+                {
+                    string topic = ht1[" NOTICE_ID"].ToString();
+                    StringBuilder sbb = new StringBuilder();
+                    sbb.Append("UPDATE NOTICE_DETAIL SET NOTICE_STATUS = 'N', MODIFY_TIME = SYSDATE WHERE NOTICE_ID= " + topic);
+                    db.UpdateDB(sbb.ToString());
                 }
             }
         }

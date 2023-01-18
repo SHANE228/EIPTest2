@@ -129,10 +129,12 @@ namespace EIPTest
 
         public string getLogin()
         {
+
             string value1 = "";
             open();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT EMP_ID FROM SJ0007_LOGIN WHERE EMP_ID= :AdminLogin";
+            //參數化查詢
             cmd.Parameters.Add(new OracleParameter(":AdminLogin", AdminLogin.Text));
             OracleDataReader dr = cmd.ExecuteReader();
             if (dr.Read())
@@ -150,6 +152,7 @@ namespace EIPTest
             string pass = MyAesCryptography.Encrypt(myKey, myIV, AdminPassword.Text);
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT EMP_PASSWORD FROM SJ0007_LOGIN WHERE EMP_PASSWORD= :password";
+            //參數化查詢
             cmd.Parameters.Add(new OracleParameter(":password", pass));
             OracleDataReader dra = cmd.ExecuteReader();
             if (dra.Read())
